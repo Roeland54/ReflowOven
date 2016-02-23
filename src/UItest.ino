@@ -1,4 +1,4 @@
-#include "UI.h"
+#include "ui/UI.h"
 #include <UTFT.h>
 
 //UTFT(model, sda, scl, cs, rst, rs)
@@ -38,7 +38,7 @@ void setup()
 	chk2.setCheck(true);
 	prgs.setPercentage(33);
 	prgs2.setPercentage(80);
-	
+
 	//Hier worden alle widgets toegevoegd aan de UI.
 	//Een betere practice zou misschien zijn om een panel te maken de grootte van de display
 	//Maar momenteel is dat nog niet echt nodig
