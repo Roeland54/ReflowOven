@@ -36,7 +36,7 @@ void setup()
 
 	//Een aantal instellingen van de widgets
 	chk2.setCheck(true);
-	prgs.setPercentage(33);
+	prgs.setPercentage(85);
 	prgs2.setPercentage(80);
 
 	//Hier worden alle widgets toegevoegd aan de UI.
