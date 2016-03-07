@@ -9,10 +9,12 @@ class Pid
   Pid();
   float Compute();
   void SetTunings(float Kp, float Ki, float Kd);
+  void SetSampleTime(int NewSampleTime);
 
   private:
   unsigned long lastTime;
-  float input, output, setpoint, errSum, lastErr, kp, ki, kd;
+  float input, output, setpoint, errSum, lastInput, kp, ki, kd;
+  int sampleTime;
 };
 
 #endif
