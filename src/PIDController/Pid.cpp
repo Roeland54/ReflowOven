@@ -12,12 +12,12 @@ void Pid::Compute()
   double timeChange = (double)(now - lastTime);
 
   /*Compute all the working error variables*/
-  double error = Setpoint - Input;
+  double error = setpoint - input;
   errSum += (error * timeChange);
   double dErr = (error - lastErr) / timeChange;
 
   /*Compute PID Output*/
-  Output = kp * error + ki * errSum + kd * dErr;
+  output = kp * error + ki * errSum + kd * dErr;
 
   /*Remember some variables for next time*/
   lastErr = error;
