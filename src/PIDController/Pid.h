@@ -7,12 +7,12 @@ class Pid
 {
   public:
   Pid();
-  void Compute();
-  void SetTunings(double Kp, double Ki, double Kd);
+  float Compute();
+  void SetTunings(float Kp, float Ki, float Kd);
 
   private:
   unsigned long lastTime;
-  double input, output, setpoint, errSum, lastErr, kp, ki, kd;
+  float input, output, setpoint, errSum, lastErr, kp, ki, kd;
 };
 
 #endif

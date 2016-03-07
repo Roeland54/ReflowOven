@@ -5,16 +5,16 @@ Pid::Pid()
 
 }
 
-void Pid::Compute()
+float Pid::Compute()
 {
   /*How long since we last calculated*/
   unsigned long now = millis();
-  double timeChange = (double)(now - lastTime);
+  float timeChange = (float)(now - lastTime);
 
   /*Compute all the working error variables*/
-  double error = setpoint - input;
+  float error = setpoint - input;
   errSum += (error * timeChange);
-  double dErr = (error - lastErr) / timeChange;
+  float dErr = (error - lastErr) / timeChange;
 
   /*Compute PID Output*/
   output = kp * error + ki * errSum + kd * dErr;
@@ -22,9 +22,11 @@ void Pid::Compute()
   /*Remember some variables for next time*/
   lastErr = error;
   lastTime = now;
+
+  return output;
 }
 
-void Pid::SetTunings(double Kp, double Ki, double Kd)
+void Pid::SetTunings(float Kp, float Ki, float Kd)
 {
   kp = Kp;
   ki = Ki;
