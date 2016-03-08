@@ -14,11 +14,15 @@ float Pid::Compute()
   {
     /*Compute all the working error variables*/
     float error = setpoint - input;
-    errSum += error;
+    iTerm += (ki * error);
+    if(iTerm > outMax)
+      iTerm = outMax;
+    else if (iTerm < outMin)
+      iTerm = outMin;
     float dInput = input - lastInput;
 
     /*Compute PID Output*/
-    output = kp * error + ki * errSum - kd * dInput;
+    output = kp * error + iTerm - kd * dInput;
 
     /*Remember some variables for next time*/
     lastInput = input;
@@ -46,4 +50,22 @@ void Pid::SetTunings(float Kp, float Ki, float Kd)
   kp = Kp;
   ki = Ki * sampleTimeInSec;
   kd = Kd / sampleTimeInSec;
+}
+
+void Pid::SetOutputLimits(float Min, float Max)
+{
+  if (Min > Max)
+    return;
+  outMin = Min;
+  outMax = Max;
+
+  if(output > outMax)
+    output = outMax;
+  else if (output < outMin)
+    output = outMin;
+
+  if(iTerm > outMax)
+    iTerm = outMax;
+  else if (iTerm < outMin)
+    iTerm = outMin;
 }
