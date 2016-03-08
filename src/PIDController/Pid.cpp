@@ -2,11 +2,12 @@
 
 Pid::Pid()
 {
-  sampleTime = 1000;
+
 }
 
-float Pid::Compute()
+float Pid::Compute(float Input)
 {
+  input = Input;
   /*How long since we last calculated*/
   unsigned long now = millis();
   float timeChange = (now - lastTime);
@@ -68,4 +69,9 @@ void Pid::SetOutputLimits(float Min, float Max)
     iTerm = outMax;
   else if (iTerm < outMin)
     iTerm = outMin;
+}
+
+void Pid::SetSetpoint(float Setpoint)
+{
+  setpoint = Setpoint;
 }
