@@ -3,12 +3,18 @@
 
 #include "../settingClasses/ReflowCurveSettings.h"
 #include "../settingClasses/SetupSettings.h"
+#include "Cooling.h"
+#include "Heating.h"
+#include "Pid.h"
+#include "SerialController.h"
+#include "Temp.h"
 #include <arduino.h>
 
 class FlowController
 {
 public:
-    FlowController(SetupSettings  *setupSettings);
+    FlowController();
+    void Init(SetupSettings  *setupSettings);
     void Start(ReflowCurveSettings *reflowCurveSettings);
     void Stop();
     bool GetState();
@@ -17,7 +23,7 @@ public:
     void SendSerialmsg(int boodschap);
 private:
     bool state;
-
+    SerialController serialController;
 };
 
 #endif

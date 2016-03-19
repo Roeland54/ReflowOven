@@ -5,18 +5,16 @@
 
 SetupSettings settings;
 // ReflowView view(ILI9341_S5P,11,13,8,9,10);
-FlowController controller(&settings);
+FlowController controller;
 
 void setup()
 {
-	Serial.begin(9600);
-
-
+	controller.Init(&settings);
 }
 
 void loop()
 {
 	delay(1000);
-	controller.SendSerialmsg(15);
+	controller.SendSerialmsg(millis());
 
 }
