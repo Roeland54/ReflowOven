@@ -1,4 +1,4 @@
-#include "ui/UI.h"
+#include "../View/Ui/UI.h"
 #include <UTFT.h>
 
 //UTFT(model, sda, scl, cs, rst, rs)
@@ -53,7 +53,6 @@ void setup()
 	ui.addWidget(&grp);
 	grp.addChild(&chk);	//Weer zelfde als hierboven
 	grp.addChild(&chk2); //En nog een keer
-
 	//En uiteindelijk tekenen we dit één keer
 	ui.draw();
 }

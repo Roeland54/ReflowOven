@@ -1,14 +1,14 @@
-#ifndef __TEMP_H_
-#define __TEMP_H_
+#ifndef __TEMP_H__
+#define __TEMP_H__
 
 class Temp
 {
   public:
-  Temp();
-  float GetTemperature();
+    Temp();
+    float GetTemperature();
 
   private:
-  float temperature;
+    float temperature;
 };
 
 #endif

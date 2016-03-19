@@ -1,11 +1,11 @@
 #include "FlowController.h"
 
-FlowController::FlowController()
+FlowController::FlowController(SetupSettings  *setupSettings)
 {
 
 }
 
-void FlowController::Start(ReflowCurveSettings reflowCurveSettings)
+void FlowController::Start(ReflowCurveSettings *reflowCurveSettings)
 {
 
 }
@@ -22,5 +22,15 @@ bool FlowController::GetState()
 
 float FlowController::GetTemperature()
 {
-  
+
+}
+
+void FlowController::SetSettings(SetupSettings *setupSettings)
+{
+
+}
+
+void FlowController::SendSerialmsg(int boodschap)
+{
+  Serial.println(boodschap);
 }

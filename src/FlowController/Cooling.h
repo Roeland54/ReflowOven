@@ -1,13 +1,13 @@
-#ifndef __COOLING_H_
-#define __COOLING_H_
+#ifndef __COOLING_H___
+#define __COOLING_H___
 
 class Cooling
 {
   public:
-  Cooling();
-  void Start();
-  void Stop();
-  void SetValue();
+    Cooling();
+    void Start();
+    void Stop();
+    void SetValue();
 
   private:
 

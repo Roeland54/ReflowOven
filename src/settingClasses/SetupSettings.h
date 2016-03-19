@@ -4,7 +4,7 @@
 class SetupSettings
 {
   public:
-  SetupSettings();
+    SetupSettings();
   private:
 };
 

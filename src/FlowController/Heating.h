@@ -1,13 +1,13 @@
-#ifndef __HEATING_H_
-#define __HEATING_H_
+#ifndef __HEATING_H__
+#define __HEATING_H__
 
 class Heating
 {
   public:
-  Heating();
-  void Start();
-  void Stop();
-  void SetValue();
+    Heating();
+    void Start();
+    void Stop();
+    void SetValue();
 
   private:
 
