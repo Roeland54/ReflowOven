@@ -27,6 +27,7 @@ public:
 
 	virtual void draw();
 	virtual void draw(int _x, int _y, bool useLoc);
+	void checkHit(int _x, int _y, Widget ** _widget);
 
 	void setNext(Widget * nextwidget);
 	void setPrevious(Widget * previouswidget);
