@@ -5,13 +5,19 @@
 UTFT tft(TFT01_24_16, 38, 39, 40, 41);
 UTouch touch( 6, 5, 4, 3, 2);
 
-UI ui(&tft, &touch, &callBack);
+UI ui(&tft, &touch, &pressCallBack, &releaseCallBack);
 
-char * txt = "Button";
-Button btn(new Point(10,10), new Size(100,50), txt);
+char * onTxt = "ON";
+char * offTxt = "OFF";
+Button onBtn(new Point(10,10), new Size(300,105), onTxt);
+Button offBtn(new Point(10,125), new Size(300,105), offTxt);
 
 void setup()
 {
+  
+  Serial.begin(9600);
+  Serial.println("Starting up...");
+  
   tft.InitLCD();
   tft.clrScr();
   tft.setColor(VGA_RED);
@@ -24,11 +30,10 @@ void setup()
   touch.InitTouch();
   touch.setPrecision(PREC_MEDIUM);
 
-  Serial.begin(9600);
-
   Serial.println("Running");
   
-  ui.addWidget(&btn);
+  ui.addWidget(&onBtn);
+  ui.addWidget(&offBtn);
 
   Serial.println("Button added");
   
@@ -43,9 +48,21 @@ void loop()
   delay(100);
 }
 
-void callBack(Widget * _widget)
+void pressCallBack(Widget * _widget)
 {
-  digitalWrite(13, !digitalRead(13));
-  Serial.println("Click!");
+  if(_widget == &onBtn)
+  {
+    digitalWrite(13, HIGH);
+    //Serial.println("Press");
+  }
+}
+
+void releaseCallBack(Widget * _widget)
+{
+  if(_widget == &offBtn)
+  {
+    digitalWrite(13, LOW);
+    //Serial.println("Press");
+  }
 }
 

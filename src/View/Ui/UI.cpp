@@ -4,15 +4,17 @@ UI::UI(UTFT * _tft)
 {
 	tft = _tft;
 }
-
+/*
 UI::UI(UTFT * _tft, UTouch * _touch) : UI(_tft)
 {
 	touch = _touch;
 }
-
-UI::UI(UTFT * _tft, UTouch * _touch, Clicked _clickCallback) : UI(_tft, _touch)
+*/
+UI::UI(UTFT * _tft, UTouch * _touch, Clicked _clickCallback, Clicked _releaseCallback) : UI(_tft)
 {
+  touch = _touch;
 	clickCallback = _clickCallback;
+  releaseCallback = _releaseCallback;
 }
 
 void UI::addWidget(Widget * _widget)
@@ -33,8 +35,9 @@ void UI::draw()
 
 void UI::update()
 {
-	Widget * last;
-
+	//Widget * last = 0;
+  previousPress = currentPress;
+  
 	if(touch->dataAvailable())
 	{
 		if(startWidget)
@@ -44,12 +47,41 @@ void UI::update()
 			int y = touch->getY();
 			if ((x!=-1) and (y!=-1))
 			{
-				startWidget->checkHit(x, y, &last);
+				startWidget->checkHit(x, y, &currentPress);
 			}
-
-			if(last)
-				clickCallback(last);
-
+      //Serial.println("Touch read.");
 		}
 	}
+ else
+ {
+  currentPress = 0;
+ }
+ /*
+ else
+ {
+    //No touch found, check for release
+    //Serial.println("No touch data available");
+    if(previousPress)
+    {
+      Serial.println("Cleared previousPress");
+      previousPress->pressed = false;
+      previousPress = 0;
+      this->draw();
+    }
+ }
+ */
+  if(previousPress != currentPress)
+  {
+    //Serial.println("Redraw!");
+    
+    if(previousPress)
+      previousPress->pressed = false;
+      
+    this->draw();
+    
+    if(currentPress)
+     clickCallback(currentPress);
+    else
+      releaseCallback(previousPress);
+  }
 }

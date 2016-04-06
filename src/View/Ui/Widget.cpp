@@ -38,15 +38,34 @@ void Widget::draw(int _x, int _y, bool _useLoc)
 	//This is only here to provide a default method in case the above is not fulfilled.
 }
 
+void Widget::drawSingle()
+{
+  //This method should be implemented in the widget itself.
+  //This is only here to provide a default method in case the above is not fulfilled.
+}
+
 void Widget::checkHit(int _x, int _y, Widget ** _last)
 {
+	//pressed = false;
+
 	if(_x >= this->location->x && _x <= this->location->x+this->size->width)
 	{
 		if(_y >= this->location->y && _y <= this->location->y+this->size->height)
 		{
-			*_last = (Widget*)this;
+      if(!pressed)
+      {
+        //Serial.println("Hit with no press before");
+			  *_last = (Widget*)this;
+        pressed = true;
+      }
+      //else
+        //Serial.println("Hit pressed before");
 		}
+    else
+      pressed = false;
 	}
+  else
+    pressed = false;
  
   if(next)
 	  next->checkHit(_x, _y, _last);

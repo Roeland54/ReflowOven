@@ -19,14 +19,18 @@ class UI
 {
 public:
 	UI(UTFT * _tft);
-	UI(UTFT * _tft, UTouch * _touch);
-	UI(UTFT * _tft, UTouch * _touch, Clicked _clickCallback);
+	//UI(UTFT * _tft, UTouch * _touch);
+	UI(UTFT * _tft, UTouch * _touch, Clicked _clickCallback, Clicked _releaseCallback);
 
 	Widget * startWidget;
 	UTFT * tft;
 	UTouch * touch;
 
 	Clicked clickCallback;
+  Clicked releaseCallback;
+
+  Widget * currentPress;
+	Widget * previousPress;
 
 	void draw();
 	void update();

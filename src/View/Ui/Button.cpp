@@ -14,14 +14,29 @@ void Button::draw()
 
 void Button::draw(int _x, int _y, bool useLoc)
 {
-	tft->setFont(SmallFont);
-	tft->setColor(VGA_BLACK);
-	tft->setBackColor(VGA_TRANSPARENT);
-	int textWidth = tft->getFontXsize()*strlen(text);
-	int textHeight = tft->getFontYsize();
-	tft->drawRect(location->x + (useLoc?_x:0), location->y + (useLoc?_y:0), location->x + (useLoc?_x:0) + size->width, location->y + (useLoc?_y:0) + size->height);
-	tft->print(text, location->x + (size->width - textWidth)/2 + (useLoc?_x:0), location->y + (size->height - textHeight)/2 + (useLoc?_y:0));
-	
+  tft->setFont(SmallFont);
+  tft->setColor(VGA_BLACK);
+  tft->setBackColor(VGA_TRANSPARENT);
+  int textWidth = tft->getFontXsize()*strlen(text);
+  int textHeight = tft->getFontYsize();
+
+  //pressed = true;
+ 
+  if(pressed)
+  {
+    tft->setColor(VGA_GREEN);
+    tft->fillRect(location->x + (useLoc?_x:0), location->y + (useLoc?_y:0), location->x + (useLoc?_x:0) + size->width, location->y + (useLoc?_y:0) + size->height);
+    tft->setColor(VGA_BLACK);
+  }
+  else
+  {
+    tft->setColor(VGA_RED);
+    tft->fillRect(location->x + (useLoc?_x:0), location->y + (useLoc?_y:0), location->x + (useLoc?_x:0) + size->width, location->y + (useLoc?_y:0) + size->height);
+    tft->setColor(VGA_BLACK);
+  }
+  tft->drawRect(location->x + (useLoc?_x:0), location->y + (useLoc?_y:0), location->x + (useLoc?_x:0) + size->width, location->y + (useLoc?_y:0) + size->height);
+  tft->print(text, location->x + (size->width - textWidth)/2 + (useLoc?_x:0), location->y + (size->height - textHeight)/2 + (useLoc?_y:0));
+  
 	if(next)
 	{
 		if(useLoc)
@@ -30,3 +45,4 @@ void Button::draw(int _x, int _y, bool useLoc)
 			next->draw();
 	}
 }
+
