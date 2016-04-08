@@ -23,7 +23,11 @@ void Widget::setPrevious(Widget * _widget)
 
 void Widget::addChild(Widget * _widget)
 {
-	this->child = _widget;
+	_widget->parent = this;
+	if(this->child)
+		this->child->setNext(_widget);
+	else
+		this->child = _widget;
 }
 
 void Widget::draw()

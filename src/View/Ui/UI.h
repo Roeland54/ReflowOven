@@ -27,9 +27,9 @@ public:
 	UTouch * touch;
 
 	Clicked clickCallback;
-  Clicked releaseCallback;
+  	Clicked releaseCallback;
 
-  Widget * currentPress;
+  	Widget * currentPress;
 	Widget * previousPress;
 
 	void draw();
