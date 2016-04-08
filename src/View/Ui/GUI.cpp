@@ -56,20 +56,7 @@ void GUI::update()
  {
   currentPress = 0;
  }
- /*
- else
- {
-    //No touch found, check for release
-    //Serial.println("No touch data available");
-    if(previousPress)
-    {
-      Serial.println("Cleared previousPress");
-      previousPress->pressed = false;
-      previousPress = 0;
-      this->draw();
-    }
- }
- */
+ 
   if(previousPress != currentPress)
   {
     if(currentPress)
