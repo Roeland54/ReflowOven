@@ -12,7 +12,7 @@ class Label : public Widget
 public:
 	Label(Point * _point, char * text);
 	void draw();
-	void draw(int _x, int _y, bool useLoc);
+	void draw(int _x, int _y, bool useLoc, bool _drawNext);
 };
 
 #endif

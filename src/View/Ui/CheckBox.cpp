@@ -14,10 +14,10 @@ CheckBox::CheckBox(Point * _point, char * _text) : Widget(_point, new Size(10,10
 
 void CheckBox::draw()
 {
-	draw(0, 0, false);
+	draw(0, 0, false, true);
 }
 
-void CheckBox::draw(int _x, int _y, bool useLoc)
+void CheckBox::draw(int _x, int _y, bool useLoc, bool _drawNext)
 {
 	tft->setFont(SmallFont);
 	tft->setColor(VGA_BLACK);
@@ -35,10 +35,10 @@ void CheckBox::draw(int _x, int _y, bool useLoc)
 #endif
 	tft->print(text, location->x + 2*tft->getFontXsize() + (useLoc?_x:0), location->y + (useLoc?_y:0));
 	
-	if(next)
+	if(_drawNext && next)
 	{
 		if(useLoc)
-			next->draw(_x, _y, true);
+			next->draw(_x, _y, true, true);
 		else
 			next->draw();
 	}

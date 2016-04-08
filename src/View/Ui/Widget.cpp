@@ -23,7 +23,8 @@ void Widget::setPrevious(Widget * _widget)
 
 void Widget::addChild(Widget * _widget)
 {
-	this->child = _widget;
+	//This method should be implemented in the widget itself.
+	//This is only here to provide a default method in case the above is not fulfilled.
 }
 
 void Widget::draw()
@@ -32,7 +33,7 @@ void Widget::draw()
 	//This is only here to provide a default method in case the above is not fulfilled.
 }
 
-void Widget::draw(int _x, int _y, bool _useLoc)
+void Widget::draw(int _x, int _y, bool _useLoc, bool _drawNext)
 {
 	//This method should be implemented in the widget itself.
 	//This is only here to provide a default method in case the above is not fulfilled.
@@ -40,26 +41,21 @@ void Widget::draw(int _x, int _y, bool _useLoc)
 
 void Widget::drawSingle()
 {
-  //This method should be implemented in the widget itself.
-  //This is only here to provide a default method in case the above is not fulfilled.
+	//This method should be implemented in the widget itself.
+	//This is only here to provide a default method in case the above is not fulfilled.
 }
 
 void Widget::checkHit(int _x, int _y, Widget ** _last)
 {
-	//pressed = false;
-
 	if(_x >= this->location->x && _x <= this->location->x+this->size->width)
 	{
 		if(_y >= this->location->y && _y <= this->location->y+this->size->height)
 		{
-      if(!pressed)
-      {
-        //Serial.println("Hit with no press before");
-			  *_last = (Widget*)this;
-        pressed = true;
-      }
-      //else
-        //Serial.println("Hit pressed before");
+			if(!pressed)
+			{
+				*_last = (Widget*)this;
+				pressed = true;
+			}
 		}
     else
       pressed = false;

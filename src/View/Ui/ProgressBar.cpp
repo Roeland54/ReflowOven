@@ -8,10 +8,10 @@ ProgressBar::ProgressBar(Point * _point, Size * _size) : Widget(_point, _size)
 
 void ProgressBar::draw()
 {
-	draw(0, 0, false);
+	draw(0, 0, false, true);
 }
 
-void ProgressBar::draw(int _x, int _y, bool useLoc)
+void ProgressBar::draw(int _x, int _y, bool useLoc, bool _drawNext)
 {
 	int percentagePoint = location->x + (useLoc?_x:0) + (size->width*percentage)/100;
 	tft->setColor(VGA_WHITE);
@@ -20,10 +20,10 @@ void ProgressBar::draw(int _x, int _y, bool useLoc)
 	tft->fillRect(location->x + (useLoc?_x:0), location->y + (useLoc?_y:0), percentagePoint, location->y + (useLoc?_y:0) + size->height);
 	tft->drawRect(location->x + (useLoc?_x:0), location->y + (useLoc?_y:0), location->x + (useLoc?_x:0) + size->width, location->y + (useLoc?_y:0) + size->height);
 
-	if(next)
+	if(_drawNext && next)
 	{
 		if(useLoc)
-			next->draw(_x, _y, true);
+			next->draw(_x, _y, true, true);
 		else
 			next->draw();
 	}

@@ -25,11 +25,12 @@ public:
 	Widget * next;
 	Widget * previous;
 	Widget * child;
+	Widget * parent;
 
 	virtual void draw();
-	virtual void draw(int _x, int _y, bool useLoc);
-  virtual void drawSingle();
-	void checkHit(int _x, int _y, Widget ** _widget);
+	virtual void draw(int _x, int _y, bool useLoc, bool _drawNext);
+  	virtual void drawSingle();
+	virtual void checkHit(int _x, int _y, Widget ** _widget);
 
 	void setNext(Widget * nextwidget);
 	void setPrevious(Widget * previouswidget);
