@@ -16,21 +16,21 @@ void Panel::addChild(Widget * _widget)
 
 void Panel::draw()
 {
-	draw(0, 0, false);
+	draw(0, 0, false, true);
 }
 
-void Panel::draw(int _x, int _y, bool useLoc)
+void Panel::draw(int _x, int _y, bool useLoc, bool _drawNext)
 {
 	tft->setColor(VGA_RED);
 	tft->fillRect(location->x + (useLoc?_x:0), location->y + (useLoc?_y:0), location->x + (useLoc?_x:0) + size->width, location->y + (useLoc?_y:0) + size->height);
 
 	if(child)
-		child->draw(location->x, location->y, true);
+		child->draw(location->x, location->y, true, true);
 
-	if(next)
+	if(_drawNext && next)
 	{
 		if(useLoc)
-			next->draw(_x, _y, true);
+			next->draw(_x, _y, true, true);
 		else
 			next->draw();
 	}

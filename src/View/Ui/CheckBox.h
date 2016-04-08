@@ -12,7 +12,7 @@ class CheckBox : public Widget
 public:
 	CheckBox(Point * _point, char * text);
 	void draw();
-	void draw(int _x, int _y, bool useLoc);
+	void draw(int _x, int _y, bool useLoc, bool _drawNext);
 	
 	bool checked;
 	void setCheck(bool _checked);

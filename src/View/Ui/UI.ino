@@ -1,11 +1,11 @@
 #include <UTFT.h>
 #include <UTouch.h>
-#include "UI.h"
+#include "GUI.h"
 
 UTFT tft(TFT01_24_16, 38, 39, 40, 41);
 UTouch touch( 6, 5, 4, 3, 2);
 
-UI gui(&tft, &touch, &pressCallBack, &releaseCallBack);
+GUI gui(&tft, &touch, &pressCallBack, &releaseCallBack);
 
 char * onTxt = "ON";
 char * offTxt = "OFF";

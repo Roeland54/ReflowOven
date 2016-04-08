@@ -36,7 +36,7 @@ void Widget::draw()
 	//This is only here to provide a default method in case the above is not fulfilled.
 }
 
-void Widget::draw(int _x, int _y, bool _useLoc)
+void Widget::draw(int _x, int _y, bool _useLoc, bool _drawNext)
 {
 	//This method should be implemented in the widget itself.
 	//This is only here to provide a default method in case the above is not fulfilled.
@@ -44,8 +44,8 @@ void Widget::draw(int _x, int _y, bool _useLoc)
 
 void Widget::drawSingle()
 {
-  //This method should be implemented in the widget itself.
-  //This is only here to provide a default method in case the above is not fulfilled.
+	//This method should be implemented in the widget itself.
+	//This is only here to provide a default method in case the above is not fulfilled.
 }
 
 void Widget::checkHit(int _x, int _y, Widget ** _last)

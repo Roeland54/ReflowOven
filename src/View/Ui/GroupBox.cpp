@@ -19,10 +19,10 @@ void GroupBox::addChild(Widget * _widget)
 
 void GroupBox::draw()
 {
-	draw(0, 0, false);
+	draw(0, 0, false, true);
 }
 
-void GroupBox::draw(int _x, int _y, bool useLoc)
+void GroupBox::draw(int _x, int _y, bool useLoc, bool _drawNext)
 {
 	tft->setColor(VGA_BLACK);
 	tft->drawRect(location->x + (useLoc?_x:0), location->y + (useLoc?_y:0) + tft->getFontYsize()/2, location->x + (useLoc?_x:0) + size->width, location->y + (useLoc?_y:0) + size->height);
@@ -34,12 +34,12 @@ void GroupBox::draw(int _x, int _y, bool useLoc)
 	tft->print(text, location->x + (useLoc?_x:0) + 2*tft->getFontXsize(), location->y + (useLoc?_y:0));
 
 	if(child)
-		child->draw(location->x, location->y + tft->getFontXsize()/2, true);
+		child->draw(location->x, location->y + tft->getFontXsize()/2, true, true);
 
-	if(next)
+	if(_drawNext && next)
 	{
 		if(useLoc)
-			next->draw(_x, _y, true);
+			next->draw(_x, _y, true, true);
 		else
 			next->draw();
 	}

@@ -9,10 +9,10 @@ TextBox::TextBox(Point * _point, Size * _size, char * _text) : Widget(_point, _s
 
 void TextBox::draw()
 {
-	draw(0, 0, false);
+	draw(0, 0, false, true);
 }
 
-void TextBox::draw(int _x, int _y, bool useLoc)
+void TextBox::draw(int _x, int _y, bool useLoc, bool _drawNext)
 {
 	tft->setFont(SmallFont);
 	tft->setColor(VGA_BLACK);
@@ -25,10 +25,10 @@ void TextBox::draw(int _x, int _y, bool useLoc)
 	tft->drawRect(location->x + (useLoc?_x:0), location->y + (useLoc?_y:0), location->x + (useLoc?_x:0) + size->width, location->y + (useLoc?_y:0) + size->height);
 	tft->print(text, location->x + size->width - textWidth + (useLoc?_x:0), location->y + (size->height - textHeight)/2 + (useLoc?_y:0));
 	
-	if(next)
+	if(_drawNext && next)
 	{
 		if(useLoc)
-			next->draw(_x, _y, true);
+			next->draw(_x, _y, true, true);
 		else
 			next->draw();
 	}
