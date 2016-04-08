@@ -5,7 +5,7 @@
 UTFT tft(TFT01_24_16, 38, 39, 40, 41);
 UTouch touch( 6, 5, 4, 3, 2);
 
-UI ui(&tft, &touch, &pressCallBack, &releaseCallBack);
+UI gui(&tft, &touch, &pressCallBack, &releaseCallBack);
 
 char * onTxt = "ON";
 char * offTxt = "OFF";
@@ -32,19 +32,19 @@ void setup()
 
   Serial.println("Running");
   
-  ui.addWidget(&onBtn);
-  ui.addWidget(&offBtn);
+  gui.addWidget(&onBtn);
+  gui.addWidget(&offBtn);
 
   Serial.println("Button added");
   
-  ui.draw();
+  gui.draw();
 
   Serial.println("UI drawn");
 }
 
 void loop()
 {
-  ui.update();
+  gui.update();
   delay(100);
 }
 
