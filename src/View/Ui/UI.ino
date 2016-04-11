@@ -18,17 +18,16 @@ Button toggleBtn(new Point(10,15), new Size(125,195), toggleTxt);
 GroupBox switchGrp(new Point(10,10), new Size(145,220), switchGrpTxt);
 GroupBox toggleGrp(new Point(165,10), new Size(145,220), toggleGrpTxt);
 
+int counter = 39;
+
 void setup()
 {
-  
   Serial.begin(9600);
   Serial.println("Starting up...");
   
   tft.InitLCD();
   tft.clrScr();
-  tft.setColor(VGA_RED);
-  tft.setBackColor(VGA_AQUA);
-  tft.fillScr(VGA_YELLOW);
+  tft.fillScr(VGA_WHITE);
 
   pinMode(13, OUTPUT);
   digitalWrite(13, LOW);
@@ -37,6 +36,15 @@ void setup()
   touch.setPrecision(PREC_MEDIUM);
 
   Serial.println("Running");
+
+  //fore, back, pressed, text
+  onBtn.setColors(VGA_LIME, VGA_LIME, VGA_GREEN, VGA_WHITE);
+  offBtn.setColors(VGA_RED, VGA_RED, VGA_MAROON, VGA_WHITE);
+  toggleBtn.setColors(VGA_BLUE, VGA_BLUE, VGA_NAVY, VGA_WHITE);
+
+  onBtn.addBinding((void*)&counter, INT);
+  offBtn.addBinding((void*)&counter, INT);
+  toggleBtn.addBinding((void*)&counter, INT);
   
   gui.addWidget(&switchGrp);
   switchGrp.addChild(&onBtn);
@@ -54,6 +62,7 @@ void setup()
 void loop()
 {
   gui.update();
+  counter++;
   delay(100);
 }
 
