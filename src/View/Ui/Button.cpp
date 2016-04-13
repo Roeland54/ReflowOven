@@ -21,25 +21,19 @@ void Button::draw(int _x, int _y, bool useLoc, bool _drawNext)
   int textHeight = tft->getFontYsize();
  
   if(pressed)
-  {
     tft->setColor(pressedColor);
-  }
   else
-  {
     tft->setColor(foreColor);
-  }
 
   tft->fillRect(location->x + (useLoc?_x:0), location->y + (useLoc?_y:0), location->x + (useLoc?_x:0) + size->width, location->y + (useLoc?_y:0) + size->height);
   tft->setColor(backColor);
   tft->drawRect(location->x + (useLoc?_x:0), location->y + (useLoc?_y:0), location->x + (useLoc?_x:0) + size->width, location->y + (useLoc?_y:0) + size->height);
+  
   if(pressed)
-  {
     tft->setBackColor(pressedColor);
-  }
   else
-  {
     tft->setBackColor(foreColor);
-  }
+
   tft->setColor(textColor);
 
   char buf[50];
