@@ -41,8 +41,14 @@ void Button::draw(int _x, int _y, bool useLoc, bool _drawNext)
     tft->setBackColor(foreColor);
   }
   tft->setColor(textColor);
-  //tft->print(text, location->x + (size->width - textWidth)/2 + (useLoc?_x:0), location->y + (size->height - textHeight)/2 + (useLoc?_y:0));
-  tft->printNumI((int)(*(int*)values[0].value), location->x + (size->width - textWidth)/2 + (useLoc?_x:0), location->y + (size->height - textHeight)/2 + (useLoc?_y:0));
+
+  char buf[50];
+  if(values[0].type == INT)
+    sprintf(buf, text, (int)(*(int*)values[0].value)); //Werkt perfect!
+  else
+    sprintf(buf, text, (float)(*(float*)values[0].value)); //Werkt perfect!
+
+  tft->print(buf, location->x + (size->width - textWidth)/2 + (useLoc?_x:0), location->y + (size->height - textHeight)/2 + (useLoc?_y:0));
   
 	if(_drawNext && next)
 	{

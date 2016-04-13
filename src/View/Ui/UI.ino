@@ -8,10 +8,10 @@ UTouch touch( 6, 5, 4, 3, 2);
 GUI gui(&tft, &touch, &pressCallBack, &releaseCallBack);
 
 char * onTxt = "ON";
-char * offTxt = "OFF";
+char * offTxt = "OFF %4.2f";
 char * toggleGrpTxt = "Toggle";
 char * switchGrpTxt = "Switch";
-char * toggleTxt = "TOGGLE";
+char * toggleTxt = "TOG %u";
 Button onBtn(new Point(10,15), new Size(125,92), onTxt);
 Button offBtn(new Point(10,117), new Size(125,93), offTxt);
 Button toggleBtn(new Point(10,15), new Size(125,195), toggleTxt);
@@ -19,6 +19,7 @@ GroupBox switchGrp(new Point(10,10), new Size(145,220), switchGrpTxt);
 GroupBox toggleGrp(new Point(165,10), new Size(145,220), toggleGrpTxt);
 
 int counter = 39;
+float floatCounter = 3.141592656;
 
 void setup()
 {
@@ -42,8 +43,8 @@ void setup()
   offBtn.setColors(VGA_RED, VGA_RED, VGA_MAROON, VGA_WHITE);
   toggleBtn.setColors(VGA_BLUE, VGA_BLUE, VGA_NAVY, VGA_WHITE);
 
-  onBtn.addBinding((void*)&counter, INT);
-  offBtn.addBinding((void*)&counter, INT);
+  //onBtn.addBinding((void*)&counter, INT);
+  offBtn.addBinding((void*)&floatCounter, FLOAT);
   toggleBtn.addBinding((void*)&counter, INT);
   
   gui.addWidget(&switchGrp);
@@ -63,6 +64,7 @@ void loop()
 {
   gui.update();
   counter++;
+  counter = counter>260?0:counter;
   delay(100);
 }
 

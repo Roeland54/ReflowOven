@@ -120,7 +120,7 @@ bool Widget::checkBindings()
 uint32_t Widget::hash(uint8_t _hash)
 {
 	uint32_t val = *(int*)values[0].value << 8 | *(int*)values[0].type;
-	Serial.print("Hash:");
-	Serial.println(val);
+	//Serial.print("Hash:");
+	//Serial.println(val);
 	return val;
 }
