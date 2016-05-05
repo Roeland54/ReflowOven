@@ -10,7 +10,7 @@ void SerialController::StartSerial()
   Serial.println("gestart");
 }
 
-void SerialController::SendMsg(int msg)
+void SerialController::SendMsg(const char *msg)
 {
   Serial.println(msg);
 }

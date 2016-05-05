@@ -8,7 +8,7 @@ class SerialController
 public:
   SerialController();
   void StartSerial();
-  void SendMsg(int msg);
+  void SendMsg(const char *msg);
 private:
 
 };

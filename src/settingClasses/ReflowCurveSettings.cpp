@@ -2,7 +2,16 @@
 
 ReflowCurveSettings::ReflowCurveSettings()
 {
-
+  rtsTempPerSec = 1.5;
+  soakTime = 80;
+  soakTemp = 150;
+  kp = 4;
+  ki = 0;
+  kd = 0;
+  rtpTempPerSec = 2;
+  reflowMaxTemp = 230;
+  reflowTime = 50;
+  coolingTempPerSec = 3;
 }
 
 void ReflowCurveSettings::SetPIDTunings(double Kp, double Ki, double Kd)

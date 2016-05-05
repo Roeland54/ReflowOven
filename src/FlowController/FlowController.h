@@ -20,8 +20,10 @@ public:
     bool GetState();
     float GetTemperature();
     void SetSettings(SetupSettings  *setupSettings);
-    void SendSerialmsg(int boodschap);
+    void SendSerialmsg(const char *boodschap);
 private:
+    void ConvertCurveToArray(ReflowCurveSettings *reflowCurveSettings);
+    double curve[600];
     bool state;
     SerialController serialController;
 };
