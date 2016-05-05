@@ -4,7 +4,7 @@
 #include "settingClasses/ReflowCurveSettings.h"
 
 SetupSettings *settings = new SetupSettings();
-// ReflowView view(ILI9341_S5P,11,13,8,9,10);
+//ReflowView view(ILI9341_S5P,11,13,8,9,10);
 FlowController *controller = new FlowController();
 ReflowCurveSettings *curveSettings = new ReflowCurveSettings();
 
@@ -12,6 +12,7 @@ void setup()
 {
 	controller->Init(settings);
 	controller->Start(curveSettings);
+	Serial.begin(9600);
 	Serial.println(freeRam());
 }
 
@@ -19,7 +20,7 @@ void loop()
 {
 
 	controller->Compute();
-	//Serial.println(freeRam());
+	Serial.println(freeRam());
 	delay(1010);
 
 }

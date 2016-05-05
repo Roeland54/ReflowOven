@@ -5,6 +5,7 @@ FlowController::FlowController()
 
 }
 
+
 void FlowController::Init(SetupSettings  *setupSettings)
 {
   serialController = new SerialController();
@@ -13,7 +14,7 @@ void FlowController::Init(SetupSettings  *setupSettings)
 
 void FlowController::Start(ReflowCurveSettings *reflowCurveSettings)
 {
-  SendSerialmsg("Flowcontroller Start funct");
+  //SendSerialmsg("Flowcontroller Start funct");
   this->reflowCurveSettings = reflowCurveSettings;
 
   pid = new Pid();
@@ -21,17 +22,20 @@ void FlowController::Start(ReflowCurveSettings *reflowCurveSettings)
   pid->SetSampleTime(100);
   pid->SetOutputLimits(-1000, 1000);
   pid->SetSetpoint(GetTempDataPoint(0));
+
   currentDataPoint = 0;
   lastTime = 0;
 
   heating = new Heating();
   heating->Start();
+
   temp = new Temp();
 }
 
 void FlowController::Compute()
 {
   int now = millis();
+
   if (now - lastTime > 1000)
   {
     currentDataPoint++;
@@ -52,7 +56,6 @@ int FlowController::GetTempDataPoint(int sec)
 {
 
   //SendSerialmsg("GetTempDataPoint aanroep");
-
   int i = 0;
   int y = 0;
   int lastSetPoint = 190;
@@ -63,7 +66,7 @@ int FlowController::GetTempDataPoint(int sec)
     lastSetPoint += reflowCurveSettings->rtsTempPerSec;
     lastSetPoint;
     if (i == sec)
-    return lastSetPoint;
+      return lastSetPoint;
     i++;
   }
 
@@ -74,7 +77,7 @@ int FlowController::GetTempDataPoint(int sec)
   {
     lastSetPoint = reflowCurveSettings->soakTemp;
     if (i == sec)
-    return lastSetPoint;
+      return lastSetPoint;
     i++;
     y++;
 
@@ -86,7 +89,7 @@ int FlowController::GetTempDataPoint(int sec)
   {
     lastSetPoint += reflowCurveSettings->rtpTempPerSec;
     if (i == sec)
-    return lastSetPoint;
+      return lastSetPoint;
     i++;
   }
 
@@ -98,7 +101,7 @@ int FlowController::GetTempDataPoint(int sec)
   {
     lastSetPoint = reflowCurveSettings->reflowMaxTemp;
     if (i == sec)
-    return lastSetPoint;
+      return lastSetPoint;
     i++;
     y++;
   }
@@ -108,7 +111,7 @@ int FlowController::GetTempDataPoint(int sec)
   {
     lastSetPoint -= reflowCurveSettings->coolingTempPerSec;
     if (i == sec)
-    return lastSetPoint;
+      return lastSetPoint;
     i++;
   }
 
@@ -126,7 +129,7 @@ bool FlowController::GetState()
 
 }
 
-float FlowController::GetTemperature()
+int FlowController::GetTemperature()
 {
 
 }

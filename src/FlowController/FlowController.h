@@ -14,24 +14,27 @@ class FlowController
 {
 public:
     FlowController();
+
     void Init(SetupSettings  *setupSettings);
     void Start(ReflowCurveSettings *reflowCurveSettings);
     void Stop();
-    bool GetState();
-    float GetTemperature();
     void SetSettings(SetupSettings  *setupSettings);
     void SendSerialmsg(const char *boodschap);
-    int GetTempDataPoint(int sec);
     void Compute();
 
-private:
+    bool GetState();
 
-    int freeRam();
-    int curve[600];
+    int GetTemperature();
+    int GetTempDataPoint(int sec);
+
+
+private:
     int lastTime;
     int setpoint;
     int currentDataPoint;
+
     bool state;
+    
     Pid *pid;
     Heating *heating;
     Temp *temp;
