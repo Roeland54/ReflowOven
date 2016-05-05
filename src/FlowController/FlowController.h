@@ -21,10 +21,14 @@ public:
     float GetTemperature();
     void SetSettings(SetupSettings  *setupSettings);
     void SendSerialmsg(const char *boodschap);
+    int GetTempDataPoint(int sec);
+
 private:
-    void ConvertCurveToArray(ReflowCurveSettings *reflowCurveSettings);
-    double curve[600];
+
+    int freeRam();
+    int curve[600];
     bool state;
+    ReflowCurveSettings *reflowCurveSettings;
     SerialController serialController;
 };
 

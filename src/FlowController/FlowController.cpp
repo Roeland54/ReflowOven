@@ -7,47 +7,89 @@ FlowController::FlowController()
 
 void FlowController::Init(SetupSettings  *setupSettings)
 {
-  Serial.begin(9600);
-  Serial.println("test");
-  /*
   SerialController serialController;
   serialController.StartSerial();
-  */
 }
 
 void FlowController::Start(ReflowCurveSettings *reflowCurveSettings)
 {
   SendSerialmsg("Flowcontroller Start funct");
-  ConvertCurveToArray(reflowCurveSettings);
+  this->reflowCurveSettings = reflowCurveSettings;
+
+  int einde = GetTempDataPoint(1000);
+
+  for(int i = 0; i < einde; i++)
+  {
+    Serial.println(GetTempDataPoint(i));
+  }
 }
 
-void FlowController::ConvertCurveToArray(ReflowCurveSettings *reflowCurveSettings)
+int FlowController::GetTempDataPoint(int sec)
 {
 
-  SendSerialmsg("ConvertCurveToArray aanroep");
-  /*
+  //SendSerialmsg("GetTempDataPoint aanroep");
+
   int i = 0;
   int y = 0;
-  double lastSetPoint = 18;
+  int lastSetPoint = 190;
 
   //define ramp to soak
   while (lastSetPoint < reflowCurveSettings->soakTemp)
   {
-    curve[i] = lastSetPoint + reflowCurveSettings->rtsTempPerSec;
-    lastSetPoint = curve[i];
+    lastSetPoint += reflowCurveSettings->rtsTempPerSec;
+    lastSetPoint;
+    if (i == sec)
+    return lastSetPoint;
     i++;
   }
 
   //add soak
-  while (y <= reflowCurveSettings->soakTime)
+  int soakTime = (reflowCurveSettings->soakTime)/10;
+
+  while (y < soakTime)
   {
-    curve[i] = reflowCurveSettings->soakTemp;
-    Serial.println(curve[i]);
+    lastSetPoint = reflowCurveSettings->soakTemp;
+    if (i == sec)
+    return lastSetPoint;
+    i++;
+    y++;
+
+  }
+
+  //Serial.println("2");
+  //add ramp to reflow
+  while (lastSetPoint < reflowCurveSettings->reflowMaxTemp)
+  {
+    lastSetPoint += reflowCurveSettings->rtpTempPerSec;
+    if (i == sec)
+    return lastSetPoint;
+    i++;
+  }
+
+  //add reflow time
+  int reflowTime = (reflowCurveSettings->reflowTime)/10;
+
+  y = 0;
+  while (y < reflowTime)
+  {
+    lastSetPoint = reflowCurveSettings->reflowMaxTemp;
+    if (i == sec)
+    return lastSetPoint;
     i++;
     y++;
   }
-*/
-  //Serial.println("end ConvertCurveToArray");
+
+  // Cooling
+  while (lastSetPoint > 240)
+  {
+    lastSetPoint -= reflowCurveSettings->coolingTempPerSec;
+    if (i == sec)
+    return lastSetPoint;
+    i++;
+  }
+
+  return i;
+
 }
 
 void FlowController::Stop()

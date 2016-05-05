@@ -2,40 +2,40 @@
 
 ReflowCurveSettings::ReflowCurveSettings()
 {
-  rtsTempPerSec = 1.5;
-  soakTime = 80;
-  soakTemp = 150;
-  kp = 4;
+  rtsTempPerSec = 30;
+  soakTime = 800;
+  soakTemp = 1500;
+  kp = 40;
   ki = 0;
   kd = 0;
-  rtpTempPerSec = 2;
-  reflowMaxTemp = 230;
-  reflowTime = 50;
-  coolingTempPerSec = 3;
+  rtpTempPerSec = 10;
+  reflowMaxTemp = 2000;
+  reflowTime = 750;
+  coolingTempPerSec = 20;
 }
 
-void ReflowCurveSettings::SetPIDTunings(double Kp, double Ki, double Kd)
+void ReflowCurveSettings::SetPIDTunings(int Kp, int Ki, int Kd)
 {
   kp = Kp;
   ki = Ki;
   kd = Kd;
 }
 
-void ReflowCurveSettings::SetSoak(double RtsTempPerSec, double SoakTime, int SoakTemp)
+void ReflowCurveSettings::SetSoak(int RtsTempPerSec, int SoakTime, int SoakTemp)
 {
   rtsTempPerSec = RtsTempPerSec;
   soakTime = SoakTime;
   soakTemp = SoakTemp;
 }
 
-void ReflowCurveSettings::SetReflow(double RtpTemPerSec, double ReflowMaxTemp, int ReflowTime)
+void ReflowCurveSettings::SetReflow(int RtpTemPerSec, int ReflowMaxTemp, int ReflowTime)
 {
   rtpTempPerSec = RtpTemPerSec;
   reflowMaxTemp = ReflowMaxTemp;
   reflowTime = ReflowTime;
 }
 
-void ReflowCurveSettings::SetCooling(double CoolingTempPerSec)
+void ReflowCurveSettings::SetCooling(int CoolingTempPerSec)
 {
   coolingTempPerSec = CoolingTempPerSec;
 }

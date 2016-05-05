@@ -5,14 +5,14 @@ class ReflowCurveSettings
 {
   public:
     ReflowCurveSettings();
-    void SetPIDTunings(double Kp, double Ki, double Kd);
-    void SetSoak(double RtsTemPerSec, double SoakTime, int SoakTemp);
-    void SetReflow(double RtpTempPerSec, double ReflowMaxTemp, int ReflowTime);
-    void SetCooling(double CoolingTempPerSec);
+    void SetPIDTunings(int Kp, int Ki, int Kd);
+    void SetSoak(int RtsTemPerSec, int SoakTime, int SoakTemp);
+    void SetReflow(int RtpTempPerSec, int ReflowMaxTemp, int ReflowTime);
+    void SetCooling(int CoolingTempPerSec);
 
   //private:
-    double kp, ki, kd;
-    double rtsTempPerSec, soakTemp, rtpTempPerSec, reflowMaxTemp, coolingTempPerSec;
+    int kp, ki, kd;
+    int rtsTempPerSec, soakTemp, rtpTempPerSec, reflowMaxTemp, coolingTempPerSec;
     int soakTime, reflowTime;
 };
 
