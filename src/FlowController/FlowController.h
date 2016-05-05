@@ -22,14 +22,21 @@ public:
     void SetSettings(SetupSettings  *setupSettings);
     void SendSerialmsg(const char *boodschap);
     int GetTempDataPoint(int sec);
+    void Compute();
 
 private:
 
     int freeRam();
     int curve[600];
+    int lastTime;
+    int setpoint;
+    int currentDataPoint;
     bool state;
+    Pid *pid;
+    Heating *heating;
+    Temp *temp;
     ReflowCurveSettings *reflowCurveSettings;
-    SerialController serialController;
+    SerialController *serialController;
 };
 
 #endif

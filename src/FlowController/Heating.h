@@ -7,7 +7,7 @@ class Heating
     Heating();
     void Start();
     void Stop();
-    void SetValue();
+    void SetValue(float value);
 
   private:
 

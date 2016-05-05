@@ -7,8 +7,8 @@ FlowController::FlowController()
 
 void FlowController::Init(SetupSettings  *setupSettings)
 {
-  SerialController serialController;
-  serialController.StartSerial();
+  serialController = new SerialController();
+  serialController->StartSerial();
 }
 
 void FlowController::Start(ReflowCurveSettings *reflowCurveSettings)
@@ -16,12 +16,36 @@ void FlowController::Start(ReflowCurveSettings *reflowCurveSettings)
   SendSerialmsg("Flowcontroller Start funct");
   this->reflowCurveSettings = reflowCurveSettings;
 
-  int einde = GetTempDataPoint(1000);
+  pid = new Pid();
+  pid->SetTunings(reflowCurveSettings->kp, reflowCurveSettings->ki, reflowCurveSettings->kd);
+  pid->SetSampleTime(100);
+  pid->SetOutputLimits(-1000, 1000);
+  pid->SetSetpoint(GetTempDataPoint(0));
+  currentDataPoint = 0;
+  lastTime = 0;
 
-  for(int i = 0; i < einde; i++)
+  heating = new Heating();
+  heating->Start();
+  temp = new Temp();
+}
+
+void FlowController::Compute()
+{
+  int now = millis();
+  if (now - lastTime > 1000)
   {
-    Serial.println(GetTempDataPoint(i));
+    currentDataPoint++;
+    setpoint = GetTempDataPoint(currentDataPoint);
+    pid->SetSetpoint(setpoint);
+    Serial.println("setpoint");
+    lastTime = now;
   }
+
+  float output = pid->Compute(temp->GetTemperature());
+  heating->SetValue(output);
+  Serial.println(setpoint);
+  Serial.println(output);
+
 }
 
 int FlowController::GetTempDataPoint(int sec)
@@ -114,5 +138,5 @@ void FlowController::SetSettings(SetupSettings *setupSettings)
 
 void FlowController::SendSerialmsg(const char *boodschap)
 {
-  serialController.SendMsg(boodschap);
+  serialController->SendMsg(boodschap);
 }

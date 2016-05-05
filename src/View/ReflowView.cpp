@@ -4,7 +4,7 @@ ReflowView::ReflowView(byte model, int RS, int WR, int CS, int RST, int SER)
 {
   UTFT tft(model, RS, WR, CS, RST, SER);
 
-  UI ui(&tft);
+  GUI gui(&tft);
 
   char * btnTxt = "BUTTON";
   char * lblTxt = "Label.";
@@ -41,17 +41,17 @@ ReflowView::ReflowView(byte model, int RS, int WR, int CS, int RST, int SER)
   //Een betere practice zou misschien zijn om een panel te maken de grootte van de display
   //Maar momenteel is dat nog niet echt nodig
   //Wat handig zou zijn, is een screenmanager, misschien dat ik hier nog voor kijk
-  ui.addWidget(&lbl);
-  ui.addWidget(&btn);
-  ui.addWidget(&txt);
-  ui.addWidget(&prgs);
-  ui.addWidget(&pnl);
+  gui.addWidget(&lbl);
+  gui.addWidget(&btn);
+  gui.addWidget(&txt);
+  gui.addWidget(&prgs);
+  gui.addWidget(&pnl);
   pnl.addChild(&pnlLbl); //addChild pas uitvoeren na ui.addWidget! ervoor is de tft pointer nog niet gekend
   pnl.addChild(&prgs2); //Zelfde als hierboven
-  ui.addWidget(&grp);
+  gui.addWidget(&grp);
   grp.addChild(&chk);	//Weer zelfde als hierboven
   grp.addChild(&chk2); //En nog een keer
 
   //En uiteindelijk tekenen we dit één keer
-  ui.draw();
+  gui.draw();
 }

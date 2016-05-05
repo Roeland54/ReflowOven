@@ -10,15 +10,17 @@ ReflowCurveSettings *curveSettings = new ReflowCurveSettings();
 
 void setup()
 {
-
-	//controller->Init(settings);
-	//controller->Start(curveSettings);
-	Serial.begin(9600);
+	controller->Init(settings);
+	controller->Start(curveSettings);
 	Serial.println(freeRam());
 }
 
 void loop()
 {
+
+	controller->Compute();
+	//Serial.println(freeRam());
+	delay(1010);
 
 }
 

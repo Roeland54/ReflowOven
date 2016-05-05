@@ -3,14 +3,14 @@
 ReflowCurveSettings::ReflowCurveSettings()
 {
   rtsTempPerSec = 30;
-  soakTime = 800;
+  soakTime = 100;
   soakTemp = 1500;
-  kp = 40;
+  kp = 2;
   ki = 0;
   kd = 0;
   rtpTempPerSec = 10;
   reflowMaxTemp = 2000;
-  reflowTime = 750;
+  reflowTime = 100;
   coolingTempPerSec = 20;
 }
 

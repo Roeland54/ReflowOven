@@ -24,6 +24,8 @@ float Pid::Compute(float Input)
 
     /*Compute PID Output*/
     output = kp * error + iTerm - kd * dInput;
+    if(output > outMax) output = outMax;
+    else if(output < outMin) output = outMin;
 
     /*Remember some variables for next time*/
     lastInput = input;
@@ -51,6 +53,10 @@ void Pid::SetTunings(float Kp, float Ki, float Kd)
   kp = Kp;
   ki = Ki * sampleTimeInSec;
   kd = Kd / sampleTimeInSec;
+
+  kp = (0 - kp);
+  ki = (0 - ki);
+  kd = (0 - kd);
 }
 
 void Pid::SetOutputLimits(float Min, float Max)

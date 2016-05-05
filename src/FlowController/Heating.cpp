@@ -15,7 +15,7 @@ void Heating::Stop()
 
 }
 
-void Heating::SetValue()
+void Heating::SetValue(float value)
 {
-  
+
 }
