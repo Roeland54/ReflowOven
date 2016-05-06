@@ -3,14 +3,27 @@
 SerialController::SerialController()
 {
   Serial.begin(9600);
+  cmdMessenger = new CmdMessenger(Serial);
+  attachCommandCallBacks();
 }
 
-void SerialController::StartSerial()
+void SerialController::SendTempData(int temp, int setpoint)
 {
-  Serial.println("gestart");
+  cmdMessenger->sendCmdStart(ASendTempData);
+  cmdMessenger->sendCmdArg(temp);
+  cmdMessenger->sendCmdArg(setpoint);
+  cmdMessenger->sendCmdEnd();
 }
 
-void SerialController::SendMsg(const char *msg)
+
+void SerialController::attachCommandCallBacks()
 {
-  Serial.println(msg);
+
+  cmdMessenger->attach(AReceivePid, OnReceivePid);
+
+}
+
+void SerialController::OnReceivePid()
+{
+  Serial.println("ontvangen");
 }

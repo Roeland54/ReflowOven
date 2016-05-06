@@ -19,7 +19,6 @@ public:
     void Start(ReflowCurveSettings *reflowCurveSettings);
     void Stop();
     void SetSettings(SetupSettings  *setupSettings);
-    void SendSerialmsg(const char *boodschap);
     void Compute();
 
     bool GetState();
@@ -34,7 +33,7 @@ private:
     int currentDataPoint;
 
     bool state;
-    
+
     Pid *pid;
     Heating *heating;
     Temp *temp;

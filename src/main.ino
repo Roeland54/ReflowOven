@@ -20,7 +20,7 @@ void loop()
 {
 
 	controller->Compute();
-	Serial.println(freeRam());
+	//Serial.println(freeRam());
 	delay(1010);
 
 }
