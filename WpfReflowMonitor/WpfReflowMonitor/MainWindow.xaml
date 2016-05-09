@@ -1,0 +1,18 @@
+﻿<Window x:Class="WpfReflowMonitor.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:wpfReflowMonitor="clr-namespace:WpfReflowMonitor"
+  Title="monitor"
+  Height="500" Width="700 " Loaded="Window_Loaded">
+    <Window.DataContext>
+        <wpfReflowMonitor:Data/>
+    </Window.DataContext>
+    <Grid Background="LightBlue" >
+        <Canvas Name="canGraph" Background="White"
+      Width="650" Height="450"
+      VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="3" Margin="21,10,21,9">
+            <Polyline Points="{Binding channel1}" Stroke="MediumVioletRed" StrokeThickness="1"></Polyline>
+            <Polyline Points="{Binding channel2}" Stroke="DodgerBlue" StrokeThickness="1"></Polyline>
+        </Canvas>
+    </Grid>
+</Window>

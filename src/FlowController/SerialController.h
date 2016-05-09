@@ -4,17 +4,19 @@
 #include <arduino.h>
 #include <CmdMessenger.h>  // CmdMessenger
 
+
 class SerialController
 {
 public:
   SerialController();
   void SendTempData(int temp, int setpoint);
   void attachCommandCallBacks();
+  void OnReceivePid(CmdMessenger *cmd2);
 private:
   CmdMessenger *cmdMessenger;
 
-  static void OnReceivePid();
-  enum {ASendTempData , AReceivePid};
+
+  enum {Eerste, AReceivePid, StartLogging , Log};
 };
 
 #endif

@@ -1,6 +1,8 @@
 #ifndef __HEATING_H__
 #define __HEATING_H__
 
+#include <arduino.h>
+
 class Heating
 {
   public:

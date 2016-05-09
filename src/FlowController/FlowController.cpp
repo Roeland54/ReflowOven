@@ -13,43 +13,52 @@ void FlowController::Init(SetupSettings  *setupSettings)
 
 void FlowController::Start(ReflowCurveSettings *reflowCurveSettings)
 {
+  enable = true;
+
   this->reflowCurveSettings = reflowCurveSettings;
 
-  pid = new Pid();
-  pid->SetTunings(reflowCurveSettings->kp, reflowCurveSettings->ki, reflowCurveSettings->kd);
-  pid->SetSampleTime(100);
-  pid->SetOutputLimits(-1000, 1000);
-  pid->SetSetpoint(GetTempDataPoint(0));
+  pid = Pid();
+  pid.SetTunings(reflowCurveSettings->kp, reflowCurveSettings->ki, reflowCurveSettings->kd);
+  pid.SetSampleTime(100);
+  pid.SetOutputLimits(-1000, 1000);
+  pid.SetSetpoint(GetTempDataPoint(0));
 
   currentDataPoint = 0;
   lastTime = 0;
 
-  heating = new Heating();
-  heating->Start();
+  heating = Heating();
+  heating.Start();
 
-  temp = new Temp();
+  temp = Temp();
+
 }
 
 void FlowController::Compute()
 {
-  int now = millis();
-  int currentTemp = temp->GetTemperature();
-
-  if (now - lastTime > 1000)
+  if (enable == true)
   {
-    currentDataPoint++;
-    setpoint = GetTempDataPoint(currentDataPoint);
-    pid->SetSetpoint(setpoint);
-    //Serial.println("setpoint");
-    lastTime = now;
+    int now = millis();
+    int currentTemp = temp.GetTemperature();
+
+    if (now - lastTime > 1000)
+    {
+      currentDataPoint++;
+      setpoint = GetTempDataPoint(currentDataPoint);
+      pid.SetSetpoint(setpoint);
+      //Serial.println("setpoint");
+      lastTime = now;
+
+    }
     serialController->SendTempData(currentTemp, setpoint);
+    float output = pid.Compute(currentTemp);
+    heating.SetValue(output);
+    //Serial.println(setpoint);
+    //Serial.println(output);
   }
-
-  float output = pid->Compute(currentTemp);
-  heating->SetValue(output);
-  //Serial.println(setpoint);
-  //Serial.println(output);
-
+  else
+  {
+    // heating uitschakelen
+  }
 }
 
 int FlowController::GetTempDataPoint(int sec)
@@ -59,10 +68,9 @@ int FlowController::GetTempDataPoint(int sec)
   int lastSetPoint = 190;
 
   //define ramp to soak
-  while (lastSetPoint < reflowCurveSettings->soakTemp)
+  while (lastSetPoint <= reflowCurveSettings->soakTemp)
   {
     lastSetPoint += reflowCurveSettings->rtsTempPerSec;
-    lastSetPoint;
     if (i == sec)
       return lastSetPoint;
     i++;
@@ -119,18 +127,20 @@ int FlowController::GetTempDataPoint(int sec)
 
 void FlowController::Stop()
 {
-
+  heating.Stop();
+  enable = false;
 }
 
 bool FlowController::GetState()
 {
-
+  return enable;
 }
 
 int FlowController::GetTemperature()
 {
-
+  return temp.GetTemperature();
 }
+
 
 void FlowController::SetSettings(SetupSettings *setupSettings)
 {

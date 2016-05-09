@@ -33,10 +33,11 @@ private:
     int currentDataPoint;
 
     bool state;
+    bool enable;
 
-    Pid *pid;
-    Heating *heating;
-    Temp *temp;
+    Pid pid;
+    Heating heating;
+    Temp temp;
     ReflowCurveSettings *reflowCurveSettings;
     SerialController *serialController;
 };

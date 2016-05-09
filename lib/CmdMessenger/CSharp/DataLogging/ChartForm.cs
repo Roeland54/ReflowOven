@@ -72,8 +72,8 @@ namespace DataLogging
 
             // get and update x-scale to scroll with data with an certain window
             var xScale = chartControl.GraphPane.XAxis.Scale;
-            xScale.Max = time + xScale.MajorStep;
-            xScale.Min = xScale.Max - windowWidth;
+            xScale.Max = 25000;
+            xScale.Min = 0;
 
             // Make sure the axes are rescaled to accommodate actual data
             chartControl.AxisChange();

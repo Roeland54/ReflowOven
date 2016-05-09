@@ -2,7 +2,7 @@
 
 Temp::Temp()
 {
-
+  //Serial.println("create temp");
 }
 
 float Temp::GetTemperature()

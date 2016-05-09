@@ -1,6 +1,6 @@
 /*
   CmdMessenger - library that provides command based messaging
-  
+
 	Permission is hereby granted, free of charge, to any person obtaining
 	a copy of this software and associated documentation files (the
 	"Software"), to deal in the Software without restriction, including
@@ -50,7 +50,7 @@ extern "C" {
 
 #define _CMDMESSENGER_VERSION 3_6 // software version of this library
 
-// **** Initialization **** 
+// **** Initialization ****
 
 /**
  * CmdMessenger constructor
@@ -126,20 +126,20 @@ void CmdMessenger::attach(byte msgId, messengerCallbackFunction newFunction)
 void CmdMessenger::feedinSerialData()
 {
     while ( !pauseProcessing && comms->available() )
-	{	   
-		// The Stream class has a readBytes() function that reads many bytes at once. On Teensy 2.0 and 3.0, readBytes() is optimized. 
+	{
+		// The Stream class has a readBytes() function that reads many bytes at once. On Teensy 2.0 and 3.0, readBytes() is optimized.
 		// Benchmarks about the incredible difference it makes: http://www.pjrc.com/teensy/benchmark_usb_serial_receive.html
 
 		size_t bytesAvailable = min(comms->available(),MAXSTREAMBUFFERSIZE);
-		comms->readBytes(streamBuffer, bytesAvailable); 
-		
+		comms->readBytes(streamBuffer, bytesAvailable);
+
 		// Process the bytes in the stream buffer, and handles dispatches callbacks, if commands are received
-		for (size_t byteNo = 0; byteNo < bytesAvailable ; byteNo++) 
-		{   
+		for (size_t byteNo = 0; byteNo < bytesAvailable ; byteNo++)
+		{
 		    int messageState = processLine(streamBuffer[byteNo]);
 
 			// If waiting for acknowledge command
-			if ( messageState == kEndOfMessage ) 
+			if ( messageState == kEndOfMessage )
 			{
 				handleMessage();
 			}
@@ -200,7 +200,7 @@ bool CmdMessenger::blockedTillReply(unsigned long timeout, int ackCmdId)
 }
 
 /**
- *   Loops as long data is available to determine if acknowledge has come in 
+ *   Loops as long data is available to determine if acknowledge has come in
  */
 bool CmdMessenger::CheckForAck(int AckCommand)
 {
@@ -253,7 +253,7 @@ bool CmdMessenger::available()
 }
 
 /**
- * Returns if the latest argument is well formed. 
+ * Returns if the latest argument is well formed.
  */
 bool CmdMessenger::isArgOk ()
 {
@@ -382,7 +382,7 @@ int CmdMessenger::findNext(char *str, char delim)
     while (true) {
         escaped = isEscaped(str,escape_character,&ArglastChar);
 		EOL = (*str == '\0' && !escaped);
-		if (EOL) { 
+		if (EOL) {
 			return pos;
 		}
         if (*str==field_separator && !escaped) {
@@ -428,7 +428,7 @@ int32_t CmdMessenger::readInt32Arg()
  */
 bool CmdMessenger::readBoolArg()
 {
-	return (readInt16Arg()!=0)?true:false;   
+	return (readInt16Arg()!=0)?true:false;
 }
 
 /**
@@ -625,8 +625,8 @@ void CmdMessenger::printSci(double f, unsigned int digits)
   {
     Serial.print('-');
     f = -f;
-  } 
-  
+  }
+
   // handle infinite values
   if (isinf(f))
   {
@@ -634,7 +634,7 @@ void CmdMessenger::printSci(double f, unsigned int digits)
     return;
   }
   // handle Not a Number
-  if (isnan(f)) 
+  if (isnan(f))
   {
     Serial.print("NaN");
     return;
@@ -645,18 +645,18 @@ void CmdMessenger::printSci(double f, unsigned int digits)
   long multiplier = pow(10, digits);     // fix int => long
 
   int exponent;
-  if (abs(f) < 10.0) { 
+  if (abs(f) < 10.0) {
 	exponent = 0;
   }	else {
 	exponent = int(log10(f));
   }
   float g = f / pow(10, exponent);
-  if ((g < 1.0) && (g != 0.0))      
+  if ((g < 1.0) && (g != 0.0))
   {
     g *= 10;
     exponent--;
   }
- 
+
   long whole = long(g);                     // single digit
   long part = long((g-whole)*multiplier+0.5);  // # digits
   // Check for rounding above .99:
