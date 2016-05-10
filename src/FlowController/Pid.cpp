@@ -5,22 +5,22 @@ Pid::Pid()
   //Serial.println("create pid");
 }
 
-float Pid::Compute(float Input)
+double Pid::Compute(double Input)
 {
   input = Input;
   /*How long since we last calculated*/
   unsigned long now = millis();
-  float timeChange = (now - lastTime);
+  int timeChange = (now - lastTime);
   if(timeChange >= sampleTime)
   {
     /*Compute all the working error variables*/
-    float error = setpoint - input;
+    double error = setpoint - input;
     iTerm += (ki * error);
     if(iTerm > outMax)
       iTerm = outMax;
     else if (iTerm < outMin)
       iTerm = outMin;
-    float dInput = input - lastInput;
+    double dInput = input - lastInput;
 
     /*Compute PID Output*/
     output = kp * error + iTerm - kd * dInput;
@@ -36,20 +36,20 @@ float Pid::Compute(float Input)
 
 }
 
-void Pid::SetSampleTime(int newSampleTime)
+void Pid::SetSampleTime(double newSampleTime)
 {
   if (newSampleTime < 0)
   {
-    float ratio = (float)newSampleTime/ (float)sampleTime;
+    double ratio = (double)newSampleTime/ (double)sampleTime;
     ki *= ratio;
     kd /= ratio;
     sampleTime = (unsigned long)newSampleTime;
   }
 }
 
-void Pid::SetTunings(float Kp, float Ki, float Kd)
+void Pid::SetTunings(double Kp, double Ki, double Kd)
 {
-  float sampleTimeInSec = sampleTime/1000;
+  double sampleTimeInSec = sampleTime/1000;
   kp = Kp;
   ki = Ki * sampleTimeInSec;
   kd = Kd / sampleTimeInSec;
@@ -59,7 +59,7 @@ void Pid::SetTunings(float Kp, float Ki, float Kd)
   kd = (0 - kd);
 }
 
-void Pid::SetOutputLimits(float Min, float Max)
+void Pid::SetOutputLimits(double Min, double Max)
 {
   if (Min > Max)
     return;
@@ -77,7 +77,7 @@ void Pid::SetOutputLimits(float Min, float Max)
     iTerm = outMin;
 }
 
-void Pid::SetSetpoint(float Setpoint)
+void Pid::SetSetpoint(double Setpoint)
 {
   setpoint = Setpoint;
 }

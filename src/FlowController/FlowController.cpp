@@ -5,7 +5,6 @@ FlowController::FlowController()
 
 }
 
-
 void FlowController::Init(SetupSettings  *setupSettings)
 {
   serialController = new SerialController();
@@ -20,7 +19,7 @@ void FlowController::Start(ReflowCurveSettings *reflowCurveSettings)
   pid = Pid();
   pid.SetTunings(reflowCurveSettings->kp, reflowCurveSettings->ki, reflowCurveSettings->kd);
   pid.SetSampleTime(100);
-  pid.SetOutputLimits(-1000, 1000);
+  pid.SetOutputLimits(-255, 255);
   pid.SetSetpoint(GetTempDataPoint(0));
 
   currentDataPoint = 0;
@@ -38,7 +37,8 @@ void FlowController::Compute()
   if (enable == true)
   {
     int now = millis();
-    int currentTemp = temp.GetTemperature();
+    double currentTemp = temp.GetTemperature();
+    //Serial.println(currentTemp);
 
     if (now - lastTime > 1000)
     {
@@ -50,22 +50,22 @@ void FlowController::Compute()
 
     }
     serialController->SendTempData(currentTemp, setpoint);
-    float output = pid.Compute(currentTemp);
+    double output = pid.Compute(currentTemp);
     heating.SetValue(output);
     //Serial.println(setpoint);
     //Serial.println(output);
   }
   else
   {
-    // heating uitschakelen
+    heating.Stop();
   }
 }
 
-int FlowController::GetTempDataPoint(int sec)
+double FlowController::GetTempDataPoint(int sec)
 {
   int i = 0;
   int y = 0;
-  int lastSetPoint = 190;
+  double lastSetPoint = 15;
 
   //define ramp to soak
   while (lastSetPoint <= reflowCurveSettings->soakTemp)
@@ -136,7 +136,7 @@ bool FlowController::GetState()
   return enable;
 }
 
-int FlowController::GetTemperature()
+double FlowController::GetTemperature()
 {
   return temp.GetTemperature();
 }

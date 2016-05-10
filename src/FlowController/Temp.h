@@ -2,15 +2,20 @@
 #define __TEMP_H__
 
 #include <arduino.h>
+#include <SPI.h>
+#include "Adafruit_MAX31855.h"
+#include "../PinConfig.h"
 
 class Temp
 {
   public:
     Temp();
-    float GetTemperature();
+    double GetTemperature();
 
   private:
-    float temperature;
+    double temperature;
+    Adafruit_MAX31855 * thermocouple;
+
 };
 
 #endif

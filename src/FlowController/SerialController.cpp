@@ -12,15 +12,15 @@ SerialController::SerialController()
   startAcqMillis = millis();
 }
 
-void SerialController::SendTempData(int temp, int setpoint)
+void SerialController::SendTempData(double temp, double setpoint)
 {
 
   float seconds = (float) (millis()-startAcqMillis) /1000.0 ;
 
   cmdMessenger->sendCmdStart(Log);
   cmdMessenger->sendCmdArg(seconds);
-  cmdMessenger->sendCmdArg(temp/10);
-  cmdMessenger->sendCmdArg(setpoint/10);
+  cmdMessenger->sendCmdArg(temp);
+  cmdMessenger->sendCmdArg(setpoint);
   cmdMessenger->sendCmdEnd();
 }
 

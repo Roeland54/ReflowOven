@@ -23,13 +23,13 @@ public:
 
     bool GetState();
 
-    int GetTemperature();
-    int GetTempDataPoint(int sec);
+    double GetTemperature();
+    double GetTempDataPoint(int sec);
 
 
 private:
     int lastTime;
-    int setpoint;
+    double setpoint;
     int currentDataPoint;
 
     bool state;

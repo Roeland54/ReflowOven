@@ -9,7 +9,7 @@ class SerialController
 {
 public:
   SerialController();
-  void SendTempData(int temp, int setpoint);
+  void SendTempData(double temp, double setpoint);
   void attachCommandCallBacks();
   void OnReceivePid(CmdMessenger *cmd2);
 private:

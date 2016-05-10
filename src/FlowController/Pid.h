@@ -7,15 +7,15 @@ class Pid
 {
   public:
     Pid();
-    float Compute(float Input);
-    void SetSetpoint(float Setpoint);
-    void SetTunings(float Kp, float Ki, float Kd);
-    void SetSampleTime(int NewSampleTime);
-    void SetOutputLimits(float Min, float Max);
+    double Compute(double Input);
+    void SetSetpoint(double Setpoint);
+    void SetTunings(double Kp, double Ki, double Kd);
+    void SetSampleTime(double NewSampleTime);
+    void SetOutputLimits(double Min, double Max);
 
   private:
     unsigned long lastTime;
-    float input, output, setpoint, iTerm, lastInput, kp, ki, kd, outMin, outMax;
+    double input, output, setpoint, iTerm, lastInput, kp, ki, kd, outMin, outMax;
     int sampleTime;
 };
 

@@ -2,10 +2,17 @@
 
 Temp::Temp()
 {
-  //Serial.println("create temp");
+  //zijn deze lijnen overbodig?
+  pinMode(16, OUTPUT);
+  pinMode(17, OUTPUT);
+  pinMode(18, INPUT);
+
+  thermocouple = new Adafruit_MAX31855(MAXCLK, MAXCS, MAXDO);
 }
 
-float Temp::GetTemperature()
+double Temp::GetTemperature()
 {
-  return 1600;
+  double c = thermocouple->readCelsius();
+  return c;
+
 }
