@@ -4,7 +4,7 @@
 #include <arduino.h>
 #include <SPI.h>
 #include "Adafruit_MAX31855.h"
-#include "../PinConfig.h"
+#include "../Config.h"
 
 class Temp
 {

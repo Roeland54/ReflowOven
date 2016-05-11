@@ -1,4 +1,5 @@
 #include "FlowController.h"
+#include "../Config.h"
 
 FlowController::FlowController()
 {
@@ -7,7 +8,10 @@ FlowController::FlowController()
 
 void FlowController::Init(SetupSettings  *setupSettings)
 {
-  serialController = new SerialController();
+  heating = setupSettings->heating;
+  heating = new Heating(setupSettings->UpdateZC, setupSettings->TrigTriac);
+  serialController = setupSettings->serialController;
+  serialController = new SerialController(setupSettings->OnRecPid);
 }
 
 void FlowController::Start(ReflowCurveSettings *reflowCurveSettings)
@@ -25,10 +29,11 @@ void FlowController::Start(ReflowCurveSettings *reflowCurveSettings)
   currentDataPoint = 0;
   lastTime = 0;
 
-  heating = Heating();
-  heating.Start();
+
+  heating->Start();
 
   temp = Temp();
+
 
 }
 
@@ -49,15 +54,15 @@ void FlowController::Compute()
       lastTime = now;
 
     }
-    serialController->SendTempData(currentTemp, setpoint);
+    //serialController->SendTempData(currentTemp, setpoint);
     double output = pid.Compute(currentTemp);
-    heating.SetValue(output);
+    heating->SetValue(output);
     //Serial.println(setpoint);
     //Serial.println(output);
   }
   else
   {
-    heating.Stop();
+    heating->Stop();
   }
 }
 
@@ -127,7 +132,7 @@ double FlowController::GetTempDataPoint(int sec)
 
 void FlowController::Stop()
 {
-  heating.Stop();
+  heating->Stop();
   enable = false;
 }
 

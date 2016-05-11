@@ -5,6 +5,12 @@ long startAcqMillis = 0;
 
 SerialController::SerialController()
 {
+
+}
+
+SerialController::SerialController(CallbackFunctionPointer OnRecPid)
+{
+  this->OnRecPid = OnRecPid;
   Serial.begin(9600);
   cmdMessenger = new CmdMessenger(Serial);
   attachCommandCallBacks();
@@ -15,7 +21,7 @@ SerialController::SerialController()
 void SerialController::SendTempData(double temp, double setpoint)
 {
 
-  float seconds = (float) (millis()-startAcqMillis) /1000.0 ;
+  int seconds = (int) (millis()-startAcqMillis) /1000.0 ;
 
   cmdMessenger->sendCmdStart(Log);
   cmdMessenger->sendCmdArg(seconds);
@@ -27,12 +33,10 @@ void SerialController::SendTempData(double temp, double setpoint)
 
 void SerialController::attachCommandCallBacks()
 {
-  //Functor functor(this);
-  //cmdMessenger->attach(AReceivePid, OnReceivePid(cmdMessenger));
-
+  cmdMessenger->attach(AReceivePid, OnRecPid);
 }
 
-void SerialController::OnReceivePid(CmdMessenger *cmd2)
+void SerialController::OnReceivePid()
 {
-  Serial.println("ontvangen");
+  cmdMessenger->readDoubleArg();
 }

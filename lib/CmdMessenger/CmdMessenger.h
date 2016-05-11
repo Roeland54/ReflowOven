@@ -164,7 +164,6 @@ public:
   // ****** Public functions ******
 
   // **** Initialization ****
-
   CmdMessenger (Stream & comms, const char fld_separator = ',',
 				const char cmd_separator = ';',
                 const char esc_character = '/');

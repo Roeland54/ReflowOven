@@ -3,18 +3,19 @@
 
 #include <arduino.h>
 #include <CmdMessenger.h>  // CmdMessenger
-
+#include "../Config.h"
 
 class SerialController
 {
 public:
   SerialController();
+  SerialController(CallbackFunctionPointer OnRecPid);
   void SendTempData(double temp, double setpoint);
   void attachCommandCallBacks();
-  void OnReceivePid(CmdMessenger *cmd2);
+  void OnReceivePid();
 private:
   CmdMessenger *cmdMessenger;
-
+  CallbackFunctionPointer OnRecPid;
 
   enum {Eerste, AReceivePid, StartLogging , Log};
 };

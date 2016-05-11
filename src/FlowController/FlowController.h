@@ -36,7 +36,7 @@ private:
     bool enable;
 
     Pid pid;
-    Heating heating;
+    Heating *heating;
     Temp temp;
     ReflowCurveSettings *reflowCurveSettings;
     SerialController *serialController;
