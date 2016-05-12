@@ -1,17 +1,24 @@
 #ifndef __REFLOWVIEW_H__
 #define __REFLOWVIEW_H__
 
-#include "Ui/GUI.h"
 #include <UTFT.h>
 #include <UTouch.h>
+#include "../View/Ui/GUI.h"
+#include "../Config.h"
 
 class ReflowView
 {
   public:
-    ReflowView(byte model, int RS, int WR, int CS, int RST, int SER=0);
-
+    ReflowView();
+    UTFT *tft;
+    UTouch *touch;
+    GUI *gui;
+    void Update();
+    void pressCallBack(Widget * _widget);
+    void releaseCallBack(Widget * _widget);
   private:
-
+    void DrawStartupPage();
+    Button *onBtn;
 };
 
 #endif

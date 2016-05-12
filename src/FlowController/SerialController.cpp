@@ -18,7 +18,7 @@ SerialController::SerialController(CallbackFunctionPointer OnRecPid)
   startAcqMillis = millis();
 }
 
-void SerialController::SendTempData(double temp, double setpoint)
+void SerialController::SendTempData(double temp, double setpoint, double output)
 {
 
   int seconds = (int) (millis()-startAcqMillis) /1000.0 ;
@@ -27,6 +27,7 @@ void SerialController::SendTempData(double temp, double setpoint)
   cmdMessenger->sendCmdArg(seconds);
   cmdMessenger->sendCmdArg(temp);
   cmdMessenger->sendCmdArg(setpoint);
+  cmdMessenger->sendCmdArg(output);
   cmdMessenger->sendCmdEnd();
 }
 

@@ -10,7 +10,7 @@ class SerialController
 public:
   SerialController();
   SerialController(CallbackFunctionPointer OnRecPid);
-  void SendTempData(double temp, double setpoint);
+  void SendTempData(double temp, double setpoint, double output);
   void attachCommandCallBacks();
   void OnReceivePid();
 private:

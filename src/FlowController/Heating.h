@@ -15,10 +15,11 @@ class Heating
     void SetValue(int value);
     void UpdateAtZeroCross();
     void TriggerTriac();
-  private:
 
-    int value;
-    bool trigger;
+  private:
+    bool enable;
+
+    volatile bool trigger;
 };
 
 #endif

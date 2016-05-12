@@ -1,9 +1,12 @@
 #include <UTFT.h>
 #include <UTouch.h>
-#include "GUI.h"
+#include "View/Ui/GUI.h"
 
 UTFT tft(TFT01_24_16, 38, 39, 40, 41);
 UTouch touch( 6, 5, 4, 3, 2);
+
+void pressCallBack(Widget * _widget);
+void releaseCallBack(Widget * _widget);
 
 GUI gui(&tft, &touch, &pressCallBack, &releaseCallBack);
 
@@ -28,7 +31,7 @@ void setup()
 {
   Serial.begin(9600);
   Serial.println("Starting up...");
-  
+
   tft.InitLCD();
   tft.clrScr();
   tft.fillScr(VGA_WHITE);
@@ -36,8 +39,7 @@ void setup()
   pinMode(13, OUTPUT);
   digitalWrite(13, LOW);
 
-  touch.InitTouch();
-  touch.setPrecision(PREC_MEDIUM);
+
 
   Serial.println("Running");
 
@@ -51,7 +53,7 @@ void setup()
   offBtn.addBinding((void*)&floatCounter, FLOAT);
   toggleBtn.addBinding((void*)&counter, INT);
   tmpLbl.addBinding((void*)&tempDiff, FLOAT);
-  
+
   gui.addWidget(&switchGrp);
   switchGrp.addChild(&onBtn);
   switchGrp.addChild(&offBtn);
@@ -60,7 +62,7 @@ void setup()
   toggleGrp.addChild(&tmpLbl);
 
   Serial.println("Widgets added");
-  
+
   gui.draw();
 
   Serial.println("UI drawn");
@@ -96,4 +98,3 @@ void releaseCallBack(Widget * _widget)
     digitalWrite(13, !digitalRead(13));
   }
 }
-

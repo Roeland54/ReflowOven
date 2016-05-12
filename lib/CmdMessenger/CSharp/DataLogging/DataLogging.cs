@@ -45,7 +45,7 @@ namespace DataLogging
             // Note that for some boards (e.g. Sparkfun Pro Micro) DtrEnable may need to be true.
             _serialTransport = new SerialTransport
             {
-                CurrentSerialSettings = { PortName = "COM3", BaudRate = 9600, DtrEnable = false } // object initializer
+                CurrentSerialSettings = { PortName = "COM4", BaudRate = 9600, DtrEnable = false } // object initializer
             };
 
             // Initialize the command messenger with the Serial Port transport layer
@@ -126,7 +126,7 @@ namespace DataLogging
         // Callback function that plots a data point for ADC 1 and ADC 2
         private void OnPlotDataPoint(ReceivedCommand arguments)
         {
-            var time    = arguments.ReadFloatArg();
+            var time    = arguments.ReadFloatArg()*50;
             var analog1 = arguments.ReadFloatArg();
             var analog2 = arguments.ReadFloatArg();
             _chartForm.UpdateGraph(time, analog1, analog2);

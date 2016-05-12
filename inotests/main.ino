@@ -13,6 +13,7 @@ void UpdateZeroCross(); // methode die zal worden aangeroepen bij iedere nuldoor
 void TriggerTriac(); //methode om de dimmer te activeren.
 CallbackFunctionPointer UpdateZC = &UpdateZeroCross;
 CallbackFunctionPointer TrigTriac = &TriggerTriac;
+volatile int heatingValue = NULL;
 
 //alles voor de seriële com
 SerialController serialController;
@@ -22,7 +23,7 @@ CallbackFunctionPointer OnRecPid = &OnReceivePid;
 // pointers worden meegegeven in de setupsettings
 SetupSettings *settings = new SetupSettings(&heating, UpdateZC, TrigTriac, &serialController, OnRecPid);
 
-//ReflowView view(ILI9341_S5P,11,13,8,9,10);
+
 FlowController *controller = new FlowController();
 ReflowCurveSettings *curveSettings = new ReflowCurveSettings();
 
@@ -31,9 +32,11 @@ void setup()
 {
 
 	controller->Init(settings);
+	ReflowView view;
+
 	controller->Start(curveSettings);
 
-	Serial.begin(9600);
+	//Serial.begin(9600);
 }
 
 void loop()

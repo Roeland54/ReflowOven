@@ -12,33 +12,50 @@ Heating::Heating(CallbackFunctionPointer UpdateZC, CallbackFunctionPointer TrigT
   pinMode(TOPHEATERPIN, OUTPUT);
   pinMode(BOTTOMHEATERPIN, OUTPUT);
 
-  attachInterrupt(digitalPinToInterrupt(ZEROCROSSPIN), UpdateZC, CHANGE);
+  //attachInterrupt(digitalPinToInterrupt(ZEROCROSSPIN), UpdateZC, CHANGE);
 
   Timer1.attachInterrupt(TrigTriac).start(9000);
   Timer1.stop();
 
-  value = 0;
+  enable = false;
+  heatingValue = 0;
   trigger = true;
 }
 
 void Heating::Start()
 {
-  Serial.println("start heating");
+  enable = true;
 }
 
 void Heating::Stop()
 {
+  enable = false;
   SetValue(0);
 }
 
 void Heating::SetValue(int value)
 {
-  this->value = value;
+  if (enable && value > 0)
+  {
+
+    //heatingValue = value;
+    //Serial.println(heatingValue);
+    analogWrite(TOPHEATERPIN, value);
+    analogWrite(BOTTOMHEATERPIN, value);
+  }
+  else
+  {
+    //heatingValue = 0;
+    analogWrite(TOPHEATERPIN, 0);
+    analogWrite(BOTTOMHEATERPIN, 0);
+  }
 }
 void Heating::UpdateAtZeroCross()
 {
-  Serial.println("ZC");
-  Timer1.start(-30*value+7800);
+  //Serial.println("ZC");
+  int x = -30 * heatingValue +7800;
+  Timer1.start(x);
+  //Serial.println(x);
 }
 
 void Heating::TriggerTriac()
@@ -50,7 +67,8 @@ void Heating::TriggerTriac()
     trigger = false;
     digitalWrite(TOPHEATERPIN, HIGH);
     digitalWrite(BOTTOMHEATERPIN, HIGH);
-    Serial.println("trigger");
+    //Serial.println(millis());
+    //Serial.println("trigger");
     Timer1.start(100); //Call same function with trigger false to disable triac pin
   }
   else
@@ -59,4 +77,5 @@ void Heating::TriggerTriac()
     digitalWrite(TOPHEATERPIN, LOW);
     digitalWrite(BOTTOMHEATERPIN, LOW);
   }
+
 }

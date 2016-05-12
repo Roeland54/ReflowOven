@@ -2,15 +2,15 @@
 
 ReflowCurveSettings::ReflowCurveSettings()
 {
-  rtsTempPerSec = 3;
-  soakTime = 10;
+  rtsTempPerSec = 0.5;
+  soakTime = 60;
   soakTemp = 150;
-  kp = 2;
-  ki = 0;
-  kd = 0;
-  rtpTempPerSec = 1;
+  kp = 60;
+  ki = 50;
+  kd = 15;
+  rtpTempPerSec = 0.5;
   reflowMaxTemp = 200;
-  reflowTime = 10;
+  reflowTime = 45;
   coolingTempPerSec = 2;
 }
 

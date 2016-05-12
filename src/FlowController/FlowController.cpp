@@ -34,7 +34,6 @@ void FlowController::Start(ReflowCurveSettings *reflowCurveSettings)
 
   temp = Temp();
 
-
 }
 
 void FlowController::Compute()
@@ -49,16 +48,21 @@ void FlowController::Compute()
     {
       currentDataPoint++;
       setpoint = GetTempDataPoint(currentDataPoint);
+
+      //pid.SetSetpoint(150);
       pid.SetSetpoint(setpoint);
-      //Serial.println("setpoint");
+      //Serial.println(setpoint);
       lastTime = now;
 
     }
-    //serialController->SendTempData(currentTemp, setpoint);
+    Serial.println("");
+    //Serial.println(currentTemp);
     double output = pid.Compute(currentTemp);
-    heating->SetValue(output);
-    //Serial.println(setpoint);
+    serialController->SendTempData(currentTemp, setpoint, output);
     //Serial.println(output);
+    //heating->SetValue(output);
+    heating->SetValue(output);
+    //Serial.println(heating->value);
   }
   else
   {
@@ -73,7 +77,7 @@ double FlowController::GetTempDataPoint(int sec)
   double lastSetPoint = 15;
 
   //define ramp to soak
-  while (lastSetPoint <= reflowCurveSettings->soakTemp)
+  while (lastSetPoint < reflowCurveSettings->soakTemp)
   {
     lastSetPoint += reflowCurveSettings->rtsTempPerSec;
     if (i == sec)
@@ -82,7 +86,7 @@ double FlowController::GetTempDataPoint(int sec)
   }
 
   //add soak
-  int soakTime = (reflowCurveSettings->soakTime)/10;
+  int soakTime = (reflowCurveSettings->soakTime);
 
   while (y < soakTime)
   {
@@ -105,7 +109,7 @@ double FlowController::GetTempDataPoint(int sec)
   }
 
   //add reflow time
-  int reflowTime = (reflowCurveSettings->reflowTime)/10;
+  int reflowTime = (reflowCurveSettings->reflowTime);
 
   y = 0;
   while (y < reflowTime)
@@ -118,7 +122,7 @@ double FlowController::GetTempDataPoint(int sec)
   }
 
   // Cooling
-  while (lastSetPoint > 240)
+  while (lastSetPoint > 24)
   {
     lastSetPoint -= reflowCurveSettings->coolingTempPerSec;
     if (i == sec)
@@ -126,7 +130,7 @@ double FlowController::GetTempDataPoint(int sec)
     i++;
   }
 
-  return i;
+  return 0;
 
 }
 
