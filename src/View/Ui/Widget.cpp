@@ -47,6 +47,8 @@ void Widget::drawSingle()
 
 void Widget::checkHit(int _x, int _y, Widget ** _last)
 {
+	//_y -= 240;
+	//_y = abs(_y);
 	if(_x >= this->location->x && _x <= this->location->x+this->size->width)
 	{
 		if(_y >= this->location->y && _y <= this->location->y+this->size->height)
@@ -65,7 +67,7 @@ void Widget::checkHit(int _x, int _y, Widget ** _last)
 
 	if(checkBindings())
 		drawSingle();
- 
+
   if(next)
 	  next->checkHit(_x, _y, _last);
 }

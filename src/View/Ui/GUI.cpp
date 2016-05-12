@@ -36,7 +36,7 @@ void GUI::draw()
 void GUI::update()
 {
   previousPress = currentPress;
-  
+
   if(touch->dataAvailable())
   {
     if(startWidget)
@@ -44,8 +44,12 @@ void GUI::update()
       touch->read();
       int x = touch->getX();
       int y = touch->getY();
+      Serial.println(x);
+      Serial.println(y);
+
       if ((x!=-1) and (y!=-1))
       {
+
         startWidget->checkHit(x, y, &currentPress);
       }
     }
@@ -54,7 +58,7 @@ void GUI::update()
  {
   currentPress = 0;
  }
- 
+
   if(previousPress != currentPress)
   {
     if(currentPress)

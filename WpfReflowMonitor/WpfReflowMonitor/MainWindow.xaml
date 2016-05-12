@@ -11,8 +11,8 @@
         <Canvas Name="canGraph" Background="White"
       Width="650" Height="450"
       VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="3" Margin="21,10,21,9">
-            <Polyline Points="{Binding channel1}" Stroke="MediumVioletRed" StrokeThickness="1"></Polyline>
-            <Polyline Points="{Binding channel2}" Stroke="DodgerBlue" StrokeThickness="1"></Polyline>
+            <Polyline Points="{Binding Path=channel1}" Stroke="MediumVioletRed" StrokeThickness="1"></Polyline>
+            <Polyline Points="{Binding Path=channel2}" Stroke="DodgerBlue" StrokeThickness="1"></Polyline>
         </Canvas>
     </Grid>
 </Window>

@@ -12,7 +12,8 @@ class SetupSettings
       CallbackFunctionPointer UpdateZC,
       CallbackFunctionPointer TrigTriac,
       SerialController *serialController,
-      CallbackFunctionPointer OnRecPid
+      CallbackFunctionPointer OnRecPid,
+      float *temp
     );
 
     CallbackFunctionPointer UpdateZC;
@@ -20,7 +21,7 @@ class SetupSettings
     CallbackFunctionPointer OnRecPid;
     SerialController *serialController;
     Heating *heating;
-
+    float *temp;
   private:
 
 };

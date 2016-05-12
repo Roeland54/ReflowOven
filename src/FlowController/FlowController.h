@@ -31,9 +31,10 @@ private:
     int lastTime;
     double setpoint;
     int currentDataPoint;
+    float *temperatuur;
 
     bool state;
-    bool enable;
+    bool enable = false;
 
     Pid pid;
     Heating *heating;
