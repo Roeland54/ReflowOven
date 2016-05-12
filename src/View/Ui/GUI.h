@@ -12,6 +12,7 @@
 #include "ProgressBar.h"
 #include "Panel.h"
 #include "GroupBox.h"
+#include "../../Config.h"
 
 typedef void (*Clicked)(Widget*);
 

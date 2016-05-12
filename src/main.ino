@@ -5,6 +5,7 @@
 #include "FlowController/Heating.h"
 #include <arduino.h>
 #include "Config.h"
+#include "View/Ui/Widget.h"
 
 //aanmaken van Methodes & functie pointers die noodzakelijk zijn om interrupts te kunnen gebruiken
 //alles voor de verwarming:
@@ -20,19 +21,25 @@ SerialController serialController;
 void OnReceivePid();
 CallbackFunctionPointer OnRecPid = &OnReceivePid;
 
+//GUI pointers
+void pressCallBack(Widget * _widget);
+void releaseCallBack(Widget * _widget);
+ClickedCallbackPointer press = &pressCallBack;
+ClickedCallbackPointer release = &releaseCallBack;
+
 // pointers worden meegegeven in de setupsettings
 SetupSettings *settings = new SetupSettings(&heating, UpdateZC, TrigTriac, &serialController, OnRecPid);
-
 
 FlowController *controller = new FlowController();
 ReflowCurveSettings *curveSettings = new ReflowCurveSettings();
 
+ReflowView view;
 
 void setup()
 {
 
 	controller->Init(settings);
-	ReflowView view;
+	view = ReflowView(press, release);
 
 	controller->Start(curveSettings);
 
@@ -43,6 +50,7 @@ void loop()
 {
 
 	controller->Compute();
+	view.Update();
 	//Serial.println("puls");
 	delay(1000);
 
@@ -69,4 +77,14 @@ void TriggerTriac()
 void OnReceivePid()
 {
 	serialController.OnReceivePid();
+}
+
+void pressCallBack(Widget * _widget)
+{
+  Serial.println("press");
+}
+
+void releaseCallBack(Widget * _widget)
+{
+
 }

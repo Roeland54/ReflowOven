@@ -8,6 +8,8 @@ UTouch touch( 6, 5, 4, 3, 2);
 void pressCallBack(Widget * _widget);
 void releaseCallBack(Widget * _widget);
 
+
+
 GUI gui(&tft, &touch, &pressCallBack, &releaseCallBack);
 
 char * onTxt = "ON";
@@ -39,7 +41,8 @@ void setup()
   pinMode(13, OUTPUT);
   digitalWrite(13, LOW);
 
-
+  touch.InitTouch();
+  touch.setPrecision(PREC_MEDIUM);
 
   Serial.println("Running");
 
@@ -82,7 +85,7 @@ void pressCallBack(Widget * _widget)
   if(_widget == &onBtn)
   {
     digitalWrite(13, HIGH);
-    //Serial.println("Press");
+    Serial.println("Press");
   }
 }
 

@@ -8,7 +8,7 @@
 */
 #include <CmdMessenger.h>
 #include "FlowController/SerialController.h"
-
+#include "View/Ui/Widget.h"
 
 // MAX31855 pins
 #define MAXDO   18
@@ -36,6 +36,8 @@
 
 //
 typedef void (*CallbackFunctionPointer)();
+//typedef void (ReflowView::*Clicked)(Widget*);
+typedef void (*ClickedCallbackPointer)(Widget*);
 
 //#ifndef __CONFIG_H__
 //#define __CONFIG_H__

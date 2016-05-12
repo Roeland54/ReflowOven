@@ -10,6 +10,7 @@ class ReflowView
 {
   public:
     ReflowView();
+    ReflowView(ClickedCallbackPointer press, ClickedCallbackPointer release);
     UTFT *tft;
     UTouch *touch;
     GUI *gui;

@@ -3,3 +3,8 @@
 \\psf\Dropbox\Projecten\Eindwerk\ReflowOven\lib\CmdMessenger\CSharp\CommandMessenger\obj\Debug\CommandMessenger.csprojResolveAssemblyReference.cache
 \\psf\Dropbox\Projecten\Eindwerk\ReflowOven\lib\CmdMessenger\CSharp\CommandMessenger\obj\Debug\CommandMessenger.dll
 \\psf\Dropbox\Projecten\Eindwerk\ReflowOven\lib\CmdMessenger\CSharp\CommandMessenger\obj\Debug\CommandMessenger.pdb
+\\psf\Dropbox\Projecten\reflow\lib\CmdMessenger\CSharp\CommandMessenger\bin\Debug\CommandMessenger.dll
+\\psf\Dropbox\Projecten\reflow\lib\CmdMessenger\CSharp\CommandMessenger\bin\Debug\CommandMessenger.pdb
+\\psf\Dropbox\Projecten\reflow\lib\CmdMessenger\CSharp\CommandMessenger\obj\Debug\CommandMessenger.csprojResolveAssemblyReference.cache
+\\psf\Dropbox\Projecten\reflow\lib\CmdMessenger\CSharp\CommandMessenger\obj\Debug\CommandMessenger.dll
+\\psf\Dropbox\Projecten\reflow\lib\CmdMessenger\CSharp\CommandMessenger\obj\Debug\CommandMessenger.pdb

@@ -5,9 +5,9 @@ ReflowCurveSettings::ReflowCurveSettings()
   rtsTempPerSec = 0.5;
   soakTime = 60;
   soakTemp = 150;
-  kp = 60;
-  ki = 50;
-  kd = 15;
+  kp = 50;
+  ki = 45;
+  kd = 7;
   rtpTempPerSec = 0.5;
   reflowMaxTemp = 200;
   reflowTime = 45;

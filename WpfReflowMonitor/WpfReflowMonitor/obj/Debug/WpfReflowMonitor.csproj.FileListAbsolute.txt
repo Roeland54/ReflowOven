@@ -18,3 +18,6 @@ C:\Users\Roeland\Dropbox\Projecten\Eindwerk\ReflowOven\WpfReflowMonitor\WpfReflo
 C:\Users\Roeland\Dropbox\Projecten\Eindwerk\ReflowOven\WpfReflowMonitor\WpfReflowMonitor\bin\Debug\CommandMessenger.dll
 C:\Users\Roeland\Dropbox\Projecten\Eindwerk\ReflowOven\WpfReflowMonitor\WpfReflowMonitor\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Roeland\Dropbox\Projecten\Eindwerk\ReflowOven\WpfReflowMonitor\WpfReflowMonitor\obj\Debug\WpfReflowMonitor_MarkupCompile.lref
+\\psf\Dropbox\Projecten\reflow\WpfReflowMonitor\WpfReflowMonitor\bin\Debug\WpfReflowMonitor.exe.config
+\\psf\Dropbox\Projecten\reflow\WpfReflowMonitor\WpfReflowMonitor\obj\Debug\WpfReflowMonitor.exe
+\\psf\Dropbox\Projecten\reflow\WpfReflowMonitor\WpfReflowMonitor\obj\Debug\WpfReflowMonitor.pdb
