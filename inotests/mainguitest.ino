@@ -7,6 +7,7 @@
 #include "Config.h"
 #include "View/Ui/Widget.h"
 
+
 //aanmaken van Methodes & functie pointers die noodzakelijk zijn om interrupts te kunnen gebruiken
 //alles voor de verwarming:
 Heating heating;
@@ -34,28 +35,60 @@ SetupSettings *settings = new SetupSettings(&heating, UpdateZC, TrigTriac, &seri
 FlowController *controller = new FlowController();
 ReflowCurveSettings *curveSettings = new ReflowCurveSettings();
 
-ReflowView view;
+//ReflowView view;
+UTFT tft(TFT01_24_16, 38, 39, 40, 41);
+UTouch touch( 6, 5, 4, 3, 2);
 
 void pressCallBack(Widget * _widget);
 void releaseCallBack(Widget * _widget);
+GUI gui(&tft, &touch, &pressCallBack, &releaseCallBack);
+
+char * onTxt = "ON";
+char * offTxt = "OFF";
+char * tmpLblTxt = "%4.2f C";
+Label tmpLbl(new Point(10, 120), tmpLblTxt);
+Button onBtn(new Point(10,15), new Size(125,92), onTxt);
+Button offBtn(new Point(170,15), new Size(125,92), offTxt);
 
 void setup()
 {
 
-	Serial.begin(9600);
-	view = ReflowView(press, release);
+	tft.InitLCD();
+  tft.clrScr();
+  tft.fillScr(VGA_WHITE);
+
+	touch.InitTouch();
+	touch.setPrecision(PREC_MEDIUM);
+
+	controller->Init(settings);
+
+  onBtn.setColors(VGA_LIME, VGA_LIME, VGA_GREEN, VGA_WHITE);
+	offBtn.setColors(VGA_RED, VGA_RED, VGA_BLACK, VGA_WHITE);
+  tmpLbl.setColors(VGA_BLACK, VGA_WHITE, VGA_BLACK, VGA_BLACK);
+
+
+  tmpLbl.addBinding((void*)&temp, FLOAT);
+
+	gui.addWidget(&onBtn);
+	gui.addWidget(&offBtn);
+	gui.addWidget(&tmpLbl);
+
+	gui.draw();
+	//view = ReflowView(press, release);
 
 	//controller->Start(curveSettings);
 
-
+	//Serial.begin(9600);
 }
 
 void loop()
 {
 
-	//controller->Compute();
-	view.Update();
-	Serial.println("puls");
+	controller->Compute();
+	gui.update();
+
+	//view.Update();
+	//Serial.println("puls");
 	delay(100);
 
 }
@@ -85,7 +118,6 @@ void OnReceivePid()
 
 void pressCallBack(Widget * _widget)
 {
-	/*
 	if(_widget == &onBtn)
 	{
 		Serial.println("on");
@@ -96,7 +128,6 @@ void pressCallBack(Widget * _widget)
 		Serial.println("off");
 		controller->Stop();
 	}
-	*/
 
 }
 

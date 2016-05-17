@@ -6,8 +6,8 @@ ReflowCurveSettings::ReflowCurveSettings()
   soakTime = 60;
   soakTemp = 150;
   kp = 50;
-  ki = 45;
-  kd = 7;
+  ki = 4.5;
+  kd = 70;
   rtpTempPerSec = 0.5;
   reflowMaxTemp = 200;
   reflowTime = 45;

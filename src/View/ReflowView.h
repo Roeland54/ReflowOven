@@ -19,7 +19,7 @@ class ReflowView
     void releaseCallBack(Widget * _widget);
   private:
     void DrawStartupPage();
-    Button *onBtn;
+    Button * onBtn;
 };
 
 #endif

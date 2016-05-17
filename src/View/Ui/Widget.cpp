@@ -6,6 +6,10 @@ Widget::Widget(Point * _point, Size * _size)
 {
 	location = _point;
 	size = _size;
+
+	values[0].type = 0;
+	next = NULL;
+	pressed = false;
 }
 
 void Widget::setNext(Widget * _widget)
@@ -65,11 +69,20 @@ void Widget::checkHit(int _x, int _y, Widget ** _last)
   else
     pressed = false;
 
-	if(checkBindings())
+		Serial.println("Pressed OK, now drawsingle");
+		delay(100);
+
+	//if(checkBindings())
 		drawSingle();
 
-  if(next)
+		Serial.println("drawsingle ok");
+		delay(100);
+
+  if(next != NULL)
 	  next->checkHit(_x, _y, _last);
+
+		Serial.println("next checkhit ok");
+		delay(100);
 }
 
 void Widget::setForeColor(int _r, int _g, int _b)

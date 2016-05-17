@@ -44,20 +44,27 @@ void ReflowView::releaseCallBack(Widget * _widget)
 void ReflowView::DrawStartupPage()
 {
   char * onTxt = "ON";
+  onBtn = new Button(new Point(10,15), new Size(125,92), onTxt);
 
-  Button onBtn(new Point(10,15), new Size(125,92), onTxt);
-
+  Serial.println("Button created");
+  delay(50);
   //fore, back, pressed, text
-  onBtn.setColors(VGA_LIME, VGA_LIME, VGA_GREEN, VGA_WHITE);
+  onBtn->setColors(VGA_LIME, VGA_LIME, VGA_GREEN, VGA_WHITE);
 
-  gui->addWidget(&onBtn);
+  Serial.println("colors set");
+  delay(50);
+
+  gui->addWidget(onBtn);
+  Serial.println("Widget added");
+  delay(50);
+
   gui->draw();
-
-  Serial.println("UI drawn");
 
 }
 
 void ReflowView::Update()
 {
-  //gui->update();
+  //Serial.println("Update ui in reflowview");
+  //delay(10);
+  gui->update();
 }

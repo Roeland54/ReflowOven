@@ -8,7 +8,7 @@
 
 enum Type
 {
-    INT,
+    INT = 1,
     FLOAT
 };
 
