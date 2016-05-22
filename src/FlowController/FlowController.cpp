@@ -13,12 +13,14 @@ void FlowController::Init(SetupSettings  *setupSettings)
   serialController = setupSettings->serialController;
   serialController = new SerialController(setupSettings->OnRecPid);
   realTemp = setupSettings->realTemp;
+  wantedTemp = setupSettings->wantedTemp;
 }
 
 void FlowController::Start(ReflowCurveSettings *reflowCurveSettings)
 {
   enable = true;
   currentDataPoint = 0;
+  serialController->startAcqMillis = 0;
   this->reflowCurveSettings = reflowCurveSettings;
 
   pid = Pid();
@@ -29,6 +31,7 @@ void FlowController::Start(ReflowCurveSettings *reflowCurveSettings)
 
   currentDataPoint = 0;
   lastTime = 0;
+
 
   heating->Start();
 
@@ -56,7 +59,8 @@ void FlowController::Compute()
       lastTime = now;
 
     }
-    Serial.println("x");
+    *wantedTemp = setpoint;
+    Serial.println("");
     //Serial.println(currentTemp);
     double output = pid.Compute(currentTemp);
     serialController->SendTempData(currentTemp, setpoint, output);
@@ -67,6 +71,7 @@ void FlowController::Compute()
   }
   else
   {
+    if (heating != NULL)
     heating->Stop();
   }
 }
@@ -138,8 +143,9 @@ double FlowController::GetTempDataPoint(int sec)
 void FlowController::Stop()
 {
   heating->Stop();
-  currentDataPoint = 0;
   enable = false;
+  //Serial.println("flowcontr stopped");
+  //delay(50);
 }
 
 bool FlowController::GetState()

@@ -46,12 +46,13 @@ void GUI::clear()
 
 void GUI::update()
 {
+  this->draw();
   previousPress = currentPress;
   //Serial.println("gui update started");
 
   if(touch->dataAvailable())
   {
-    //Serial.println("Touch detected");
+    Serial.println("Touch detected");
     //delay(100);
     if(startWidget != NULL)
     {
@@ -63,6 +64,7 @@ void GUI::update()
       int y = touch->getY();
       //Serial.println(x);
       //Serial.println(y);
+      //delay(50);
 
       if ((x!=-1) and (y!=-1))
       {
@@ -72,12 +74,13 @@ void GUI::update()
   }
  else
  {
+  //startWidget->checkHit(1, 1, &currentPress);
   currentPress = 0;
  }
 
  //Serial.print("currentPress: ");
- //Serial.println((int)currentPress);
- //delay(100);
+ Serial.println((int)currentPress);
+ delay(100);
  //Serial.print("previousPress: ");
  //Serial.println((int)previousPress);
  //delay(100);
@@ -86,9 +89,12 @@ void GUI::update()
   {
     if(currentPress)
     {
+
+      Serial.println("currentPress");
       currentPress->pressed = true;
       currentPress->drawSingle();
       clickCallback(currentPress);
+
     }
     else
     {

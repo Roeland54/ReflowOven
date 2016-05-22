@@ -27,11 +27,15 @@ class ReflowView
     float *realTemp;
     void DrawStartupPage();
     void DrawFlowPage();
+    void DrawSetPage();
     Button * onBtn;
     Button * offBtn;
     Button * setBtn;
     Label * realTempLbl;
     Label * wantedTempLbl;
+    Label * realTempDesLbl;
+    Label * wantedTempDesLbl;
+
 };
 
 #endif

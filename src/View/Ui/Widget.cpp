@@ -70,20 +70,14 @@ void Widget::checkHit(int _x, int _y, Widget ** _last)
   else
     pressed = false;
 
-		//Serial.println("Pressed OK, now drawsingle");
-		delay(100);
 
 	//if(checkBindings())
 		drawSingle();
 
-		//Serial.println("drawsingle ok");
-		delay(100);
 
   if(next != NULL)
 	  next->checkHit(_x, _y, _last);
 
-		//Serial.println("next checkhit ok");
-		delay(100);
 }
 
 void Widget::setForeColor(int _r, int _g, int _b)

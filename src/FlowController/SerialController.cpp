@@ -1,7 +1,6 @@
 #include "SerialController.h"
 #include "Functor.cpp"
 
-long startAcqMillis = 0;
 
 SerialController::SerialController()
 {
@@ -15,11 +14,13 @@ SerialController::SerialController(CallbackFunctionPointer OnRecPid)
   cmdMessenger = new CmdMessenger(Serial);
   attachCommandCallBacks();
   cmdMessenger->sendCmd(StartLogging,"Start Logging");
-  startAcqMillis = millis();
+  startAcqMillis = 0;
 }
 
 void SerialController::SendTempData(double temp, double setpoint, double output)
 {
+  if (startAcqMillis == 0)
+  startAcqMillis = millis();
 
   int seconds = (int) (millis()-startAcqMillis) /1000.0 ;
 
