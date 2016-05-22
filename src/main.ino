@@ -24,13 +24,20 @@ CallbackFunctionPointer OnRecPid = &OnReceivePid;
 //GUI pointers
 void pressCallBack(Widget * _widget);
 void releaseCallBack(Widget * _widget);
-float wantedTemp = 180;
-float realTemp = 20;
+float wantedTemp;
+float realTemp;
 ClickedCallbackPointer press = &pressCallBack;
 ClickedCallbackPointer release = &releaseCallBack;
 
 // pointers worden meegegeven in de setupsettings
-SetupSettings *settings = new SetupSettings(&heating, UpdateZC, TrigTriac, &serialController, OnRecPid, &wantedTemp, &realTemp);
+SetupSettings *settings = new SetupSettings(
+	&heating,
+	UpdateZC,
+	TrigTriac, 
+	&serialController,
+	OnRecPid,
+	&wantedTemp,
+	&realTemp);
 
 FlowController *controller = new FlowController();
 ReflowCurveSettings *curveSettings = new ReflowCurveSettings();
