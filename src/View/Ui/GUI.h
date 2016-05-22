@@ -34,6 +34,7 @@ public:
   Widget * previousPress;
 
   void draw();
+  void clear();
   void update();
   void addWidget(Widget * _widget);
 };

@@ -31,7 +31,8 @@ private:
     int lastTime;
     double setpoint;
     int currentDataPoint;
-    float *temperatuur;
+    float *realTemp;
+    float *wantedTemp;
 
     bool state;
     bool enable = false;

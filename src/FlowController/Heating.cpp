@@ -17,7 +17,7 @@ Heating::Heating(CallbackFunctionPointer UpdateZC, CallbackFunctionPointer TrigT
   Timer1.attachInterrupt(TrigTriac).start(9000);
   Timer1.stop();
 
-  enable = false;
+  enable = true;
   heatingValue = 0;
   trigger = true;
 }

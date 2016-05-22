@@ -12,7 +12,7 @@ void FlowController::Init(SetupSettings  *setupSettings)
   heating = new Heating(setupSettings->UpdateZC, setupSettings->TrigTriac);
   serialController = setupSettings->serialController;
   serialController = new SerialController(setupSettings->OnRecPid);
-  temperatuur = setupSettings->temp;
+  realTemp = setupSettings->realTemp;
 }
 
 void FlowController::Start(ReflowCurveSettings *reflowCurveSettings)
@@ -30,7 +30,6 @@ void FlowController::Start(ReflowCurveSettings *reflowCurveSettings)
   currentDataPoint = 0;
   lastTime = 0;
 
-
   heating->Start();
 
   temp = Temp();
@@ -43,7 +42,7 @@ void FlowController::Compute()
   {
     int now = millis();
     double currentTemp = temp.GetTemperature();
-    *temperatuur = currentTemp;
+    *realTemp = currentTemp;
     //Serial.println(currentTemp);
 
     if (now - lastTime > 1000)
@@ -57,7 +56,7 @@ void FlowController::Compute()
       lastTime = now;
 
     }
-    Serial.println("");
+    Serial.println("x");
     //Serial.println(currentTemp);
     double output = pid.Compute(currentTemp);
     serialController->SendTempData(currentTemp, setpoint, output);
@@ -139,6 +138,7 @@ double FlowController::GetTempDataPoint(int sec)
 void FlowController::Stop()
 {
   heating->Stop();
+  currentDataPoint = 0;
   enable = false;
 }
 

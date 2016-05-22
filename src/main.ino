@@ -24,12 +24,13 @@ CallbackFunctionPointer OnRecPid = &OnReceivePid;
 //GUI pointers
 void pressCallBack(Widget * _widget);
 void releaseCallBack(Widget * _widget);
-float temp;
+float wantedTemp = 180;
+float realTemp = 20;
 ClickedCallbackPointer press = &pressCallBack;
 ClickedCallbackPointer release = &releaseCallBack;
 
 // pointers worden meegegeven in de setupsettings
-SetupSettings *settings = new SetupSettings(&heating, UpdateZC, TrigTriac, &serialController, OnRecPid, &temp);
+SetupSettings *settings = new SetupSettings(&heating, UpdateZC, TrigTriac, &serialController, OnRecPid, &wantedTemp, &realTemp);
 
 FlowController *controller = new FlowController();
 ReflowCurveSettings *curveSettings = new ReflowCurveSettings();
@@ -39,23 +40,31 @@ ReflowView view;
 void pressCallBack(Widget * _widget);
 void releaseCallBack(Widget * _widget);
 
+int i = 0;
+
 void setup()
 {
 
 	Serial.begin(9600);
-	view = ReflowView(press, release);
-
-	//controller->Start(curveSettings);
-
+	//view = ReflowView(press, release, &wantedTemp, &realTemp);
+  Serial.println("start");
+	controller->Start(curveSettings);
 
 }
 
 void loop()
 {
 
-	//controller->Compute();
-	view.Update();
-	Serial.println("puls");
+	controller->Compute();
+	//view.Update();
+
+	if(i == 30)
+	{
+		Serial.println("puls");
+		i = 0;
+	}
+	i++;
+
 	delay(100);
 
 }
@@ -85,22 +94,15 @@ void OnReceivePid()
 
 void pressCallBack(Widget * _widget)
 {
-	/*
-	if(_widget == &onBtn)
+	if (_widget->text == "START")
 	{
-		Serial.println("on");
-		controller->Start(curveSettings);
+		//controller->Start(curveSettings);
+		Serial.println("start");
 	}
-	else if(_widget == &offBtn)
-	{
-		Serial.println("off");
-		controller->Stop();
-	}
-	*/
-
+	view.pressCallBack(_widget);
 }
 
 void releaseCallBack(Widget * _widget)
 {
-
+	view.releaseCallBack(_widget);
 }

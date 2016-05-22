@@ -10,7 +10,12 @@ class ReflowView
 {
   public:
     ReflowView();
-    ReflowView(ClickedCallbackPointer press, ClickedCallbackPointer release);
+    ReflowView(
+      ClickedCallbackPointer press,
+      ClickedCallbackPointer release,
+      float *wantedTemp,
+      float *realTemp
+    );
     UTFT *tft;
     UTouch *touch;
     GUI *gui;
@@ -18,8 +23,15 @@ class ReflowView
     void pressCallBack(Widget * _widget);
     void releaseCallBack(Widget * _widget);
   private:
+    float *wantedTemp;
+    float *realTemp;
     void DrawStartupPage();
+    void DrawFlowPage();
     Button * onBtn;
+    Button * offBtn;
+    Button * setBtn;
+    Label * realTempLbl;
+    Label * wantedTempLbl;
 };
 
 #endif

@@ -37,25 +37,32 @@ void GUI::draw()
     startWidget->draw();
 }
 
+void GUI::clear()
+{
+  //tft->clrScr();
+  tft->fillScr(VGA_WHITE);
+  startWidget = NULL;
+}
+
 void GUI::update()
 {
   previousPress = currentPress;
-  Serial.println("gui update started");
+  //Serial.println("gui update started");
 
   if(touch->dataAvailable())
   {
-    Serial.println("Touch detected");
+    //Serial.println("Touch detected");
     //delay(100);
     if(startWidget != NULL)
     {
-      Serial.println("startWidget != NULL");
+      //Serial.println("startWidget != NULL");
       touch->read();
-      Serial.println("touch read");
+      //Serial.println("touch read");
       delay(100);
       int x = touch->getX();
       int y = touch->getY();
-      Serial.println(x);
-      Serial.println(y);
+      //Serial.println(x);
+      //Serial.println(y);
 
       if ((x!=-1) and (y!=-1))
       {
@@ -68,12 +75,12 @@ void GUI::update()
   currentPress = 0;
  }
 
- Serial.print("currentPress: ");
- Serial.println((int)currentPress);
- delay(100);
- Serial.print("previousPress: ");
- Serial.println((int)previousPress);
- delay(100);
+ //Serial.print("currentPress: ");
+ //Serial.println((int)currentPress);
+ //delay(100);
+ //Serial.print("previousPress: ");
+ //Serial.println((int)previousPress);
+ //delay(100);
 
   if(previousPress != currentPress)
   {

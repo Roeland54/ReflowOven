@@ -3,8 +3,8 @@
 Button::Button(Point * _point, Size * _size, char * _text) : Widget(_point, _size)
 {
 	text = _text;
-	bold = false;
-	fontSize = 14;
+	bold = true;
+	fontSize = 40;
 }
 
 void Button::draw()
@@ -14,7 +14,7 @@ void Button::draw()
 
 void Button::draw(int _x, int _y, bool useLoc, bool _drawNext)
 {
-  tft->setFont(SmallFont);
+  tft->setFont(BigFont);
   tft->setColor(foreColor);
   tft->setBackColor(backColor);
   int textWidth = tft->getFontXsize()*strlen(text);
@@ -62,8 +62,10 @@ void Button::draw(int _x, int _y, bool useLoc, bool _drawNext)
 
 void Button::drawSingle()
 {
+	/*
   if(this->parent)
     this->draw(this->parent->location->x, this->parent->location->y, true, false);
   else
     this->draw(0, 0, false, false);
+		*/
 }

@@ -5,12 +5,15 @@ SetupSettings::SetupSettings(Heating *heating,
    CallbackFunctionPointer TrigTriac,
    SerialController *serialController,
    CallbackFunctionPointer OnRecPid,
-   float *temp)
+   float *wantedTemp,
+   float *realTemp
+   )
 {
   this->heating = heating;
   this->UpdateZC = UpdateZC;
   this->TrigTriac = TrigTriac;
   this->OnRecPid = OnRecPid;
   this->serialController = serialController;
-  this->temp = temp;
+  this->wantedTemp = wantedTemp;
+  this->realTemp = realTemp;
 }

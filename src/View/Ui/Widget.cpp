@@ -1,6 +1,7 @@
 #include "Widget.h"
 
 extern uint8_t SmallFont[];
+extern uint8_t BigFont[];
 
 Widget::Widget(Point * _point, Size * _size)
 {
@@ -69,19 +70,19 @@ void Widget::checkHit(int _x, int _y, Widget ** _last)
   else
     pressed = false;
 
-		Serial.println("Pressed OK, now drawsingle");
+		//Serial.println("Pressed OK, now drawsingle");
 		delay(100);
 
 	//if(checkBindings())
 		drawSingle();
 
-		Serial.println("drawsingle ok");
+		//Serial.println("drawsingle ok");
 		delay(100);
 
   if(next != NULL)
 	  next->checkHit(_x, _y, _last);
 
-		Serial.println("next checkhit ok");
+		//Serial.println("next checkhit ok");
 		delay(100);
 }
 
