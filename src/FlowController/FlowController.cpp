@@ -132,6 +132,7 @@ double FlowController::GetTempDataPoint(int sec)
 
 void FlowController::Stop()
 {
+  enable = false;
   heating->Stop();
 }
 
