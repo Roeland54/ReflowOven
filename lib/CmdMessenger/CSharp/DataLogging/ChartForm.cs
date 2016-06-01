@@ -32,21 +32,21 @@ namespace DataLogging
             var myPane = chartControl.GraphPane;
 
             // Set the Titles
-            myPane.Title.Text = "Data logging using CmdMessenger";
+            myPane.Title.Text = "Data logging ";
             myPane.XAxis.Title.Text = "Time (s)";
-            myPane.YAxis.Title.Text = "Voltage (v)";
+            myPane.YAxis.Title.Text = "Temperature (C)";
 
             // Create data arrays for rolling points
             _analog1List = new RollingPointPairList(3000);
             _analog2List = new RollingPointPairList(3000);
 
             // Create a smoothened red curve 
-            LineItem myCurve = myPane.AddCurve("Analog 1", _analog1List, Color.Red, SymbolType.None);
+            LineItem myCurve = myPane.AddCurve("Real", _analog1List, Color.Red, SymbolType.None);
             myCurve.Line.IsSmooth = true;
             myCurve.Line.SmoothTension = 0.2f;
 
             // Create a smoothened blue curve 
-            LineItem myCurve2 = myPane.AddCurve("Analog 2", _analog2List, Color.Blue, SymbolType.None);
+            LineItem myCurve2 = myPane.AddCurve("Wanted", _analog2List, Color.Blue, SymbolType.None);
 
             myCurve2.Line.IsSmooth = true;
             myCurve2.Line.SmoothTension = 0.2f;
@@ -71,9 +71,9 @@ namespace DataLogging
             Console.WriteLine("Update chart");
 
             // get and update x-scale to scroll with data with an certain window
-            var xScale = chartControl.GraphPane.XAxis.Scale;
-            xScale.Max = 40000;
-            xScale.Min = 0;
+            //var xScale = chartControl.GraphPane.XAxis.Scale;
+            //xScale.Max = 40000;
+            //xScale.Min = 0;
 
             // Make sure the axes are rescaled to accommodate actual data
             chartControl.AxisChange();

@@ -51,11 +51,7 @@ int i = 0;
 
 void setup()
 {
-
-	//Serial.begin(9600);
 	view = ReflowView(press, release, &wantedTemp, &realTemp, curveSettings);
-
-
 	controller->Init(settings);
   Serial.println("start");
 }
@@ -64,29 +60,11 @@ void loop()
 {
 
 	controller->Compute();
-
 	view.Update();
-
-
-	if(i == 15)
-	{
-		//Serial.println("puls");
-		i = 0;
-	}
-	i++;
-
 	delay(100);
 
 }
 
-/*
-functie voor UNO
-int freeRam () {
-  extern int __heap_start, *__brkval;
-  int v;
-  return (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval);
-}
-*/
 void UpdateZeroCross()
 {
 	heating.UpdateAtZeroCross();
@@ -107,12 +85,10 @@ void pressCallBack(Widget * _widget)
 	if (_widget->text == "START")
 	{
 		controller->Start(curveSettings);
-		Serial.println("start");
 	}
 	else if (_widget->text == "STOP")
 	{
 		controller->Stop();
-		Serial.println("stop");
 	}
 	view.pressCallBack(_widget);
 }

@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using CommandMessenger;
 using CommandMessenger.TransportLayer;
 using WpfReflowMonitor.Annotations;
@@ -21,33 +22,21 @@ namespace WpfReflowMonitor
         Log,
     };
 
-    class Data : INotifyPropertyChanged
+    partial class MainWindow 
     {
-        public ObservableCollection<Point> channel1 { get; set; }
-        public ObservableCollection<Point> channel2 { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         private SerialTransport _serialTransport;
         private CmdMessenger _cmdMessenger;
 
-
         // Setup function
         public void Setup()
         {
-            channel1 = new ObservableCollection<Point>();
-            channel2 = new ObservableCollection<Point>();
             // Create Serial Port object
             // Note that for some boards (e.g. Sparkfun Pro Micro) DtrEnable may need to be true.
             _serialTransport = new SerialTransport
             {
-                CurrentSerialSettings = { PortName = "COM3", BaudRate = 9600, DtrEnable = false } // object initializer
+                CurrentSerialSettings = { PortName = "COM4", BaudRate = 9600, DtrEnable = false } // object initializer
             };
 
             // Initialize the command messenger with the Serial Port transport layer
@@ -97,16 +86,17 @@ namespace WpfReflowMonitor
             var time = arguments.ReadFloatArg();
             time = time/100;
 
-            var realTemp = arguments.ReadFloatArg();
+            var realTemp = arguments.ReadFloatArg()/100;
             Point p1 = new Point(time,realTemp);
-            channel1.Add(p1);
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                wantedPoints.Add(p1);
+            }));
+
 
             var wantedTemp = arguments.ReadFloatArg();
             Point p2 = new Point(time, wantedTemp);
-            channel2.Add(p2);
 
-            OnPropertyChanged("channel1");
-            OnPropertyChanged("channel2");
         }
 
 

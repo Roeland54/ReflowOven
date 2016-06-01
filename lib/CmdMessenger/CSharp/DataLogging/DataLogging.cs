@@ -126,9 +126,9 @@ namespace DataLogging
         // Callback function that plots a data point for ADC 1 and ADC 2
         private void OnPlotDataPoint(ReceivedCommand arguments)
         {
-            var time    = arguments.ReadFloatArg()*50;
-            var analog1 = arguments.ReadFloatArg();
-            var analog2 = arguments.ReadFloatArg();
+            var time    = arguments.ReadFloatArg();
+            var analog1 = arguments.ReadFloatArg()/100;
+            var analog2 = arguments.ReadFloatArg()/100;
             _chartForm.UpdateGraph(time, analog1, analog2);
         }
 

@@ -31,14 +31,10 @@ ReflowView::ReflowView(
 {
 
   tft = new UTFT(MODEL, RS, WR, CSS, RST);
-  //Serial.println("Starting up...");
-
-
 
   pinMode(13, OUTPUT);
   digitalWrite(13, LOW);
 
-  //Serial.println("Running");
   touch = new UTouch(A, B, C, D, E);
 
   gui = new GUI(tft, touch, press, release);
@@ -65,8 +61,6 @@ ReflowView::ReflowView(
 
 void ReflowView::pressCallBack(Widget * _widget)
 {
-  //Serial.println("press");
-  //delay(50);
   if (_widget == onBtn)
   {
     DrawFlowPage();
@@ -128,7 +122,6 @@ void ReflowView::pressCallBack(Widget * _widget)
     *Txt12 += 2;
   }
 
-
 }
 
 void ReflowView::releaseCallBack(Widget * _widget)
@@ -144,25 +137,16 @@ void ReflowView::DrawStartupPage()
   char * offTxt = "STOP";
   char * setTxt = "SETTINGS";
   onBtn = new Button(new Point(17,18), new Size(135,92), onTxt);
-  offBtn = new Button(new Point(165,18), new Size(135,92), offTxt);
-  setBtn = new Button(new Point(17,129), new Size(135,92), setTxt);
+  offBtn = new Button(new Point(17,129), new Size(283,92), offTxt);
+  setBtn = new Button(new Point(165,18), new Size(135,92), setTxt);
 
-  //Serial.println("Button created");
-  //delay(50);
-  //fore, back, pressed, text
   onBtn->setColors(VGA_LIME, VGA_LIME, VGA_GREEN, VGA_WHITE);
   offBtn->setColors(VGA_RED, VGA_RED, VGA_MAROON, VGA_WHITE);
   setBtn->setColors(VGA_BLUE, VGA_BLUE, VGA_NAVY, VGA_WHITE);
 
-  //Serial.println("colors set");
-  //delay(50);
-
   gui->addWidget(onBtn);
   gui->addWidget(offBtn);
   gui->addWidget(setBtn);
-
-  //Serial.println("Widget added");
-  //delay(50);
 
   gui->draw();
 
@@ -172,11 +156,7 @@ void ReflowView::DrawFlowPage()
 {
   gui->clear();
 
-  //char * onTxt = "ON";
   char * offTxt = "STOP";
-  //char * setTxt = "SETTINGS";
-  //onBtn = new Button(new Point(17,18), new Size(125,92), onTxt);
-
   char * tmpLblTxt = "%4.2f C";
 
   wantedTempLbl = new Label(new Point(167, 40), tmpLblTxt);
@@ -184,12 +164,8 @@ void ReflowView::DrawFlowPage()
   wantedTempDesLbl = new Label(new Point(20, 40), wantedLblTxt);
   realTempDesLbl = new Label(new Point(20, 80), realLblTxt);
 
-  offBtn = new Button(new Point(93,129), new Size(135,92), offTxt);
+  offBtn = new Button(new Point(17,129), new Size(283,92), offTxt);
 
-  //Serial.println("Button created");
-  //delay(50);
-  //fore, back, pressed, text
-  //onBtn->setColors(VGA_LIME, VGA_LIME, VGA_GREEN, VGA_WHITE);
   offBtn->setColors(VGA_RED, VGA_RED, VGA_MAROON, VGA_WHITE);
 
   wantedTempLbl->setColors(VGA_BLACK, VGA_WHITE, VGA_BLACK, VGA_BLACK);
@@ -201,20 +177,12 @@ void ReflowView::DrawFlowPage()
   realTempLbl->addBinding((void*)realTemp, FLOAT);
   wantedTempDesLbl->addBinding((void*)&wantedLblTxt, FLOAT);
   realTempDesLbl->addBinding((void*)&realLblTxt, FLOAT);
-  //Serial.println("colors set");
-  //delay(50);
 
-  //gui->addWidget(onBtn);
   gui->addWidget(offBtn);
   gui->addWidget(wantedTempLbl);
   gui->addWidget(realTempLbl);
   gui->addWidget(wantedTempDesLbl);
   gui->addWidget(realTempDesLbl);
-
-  //gui->addWidget(setBtn);
-
-  //Serial.println("Widget added");
-  //delay(50);
 
   gui->draw();
 
@@ -258,7 +226,6 @@ void ReflowView::DrawSetPage()
   plusRamp2Btn = new Button(new Point(285,105), new Size(25,25), plusTxt);
   plusReflowTempBtn = new Button(new Point(285,135), new Size(25,25), plusTxt);
   plusReflowTimeBtn = new Button(new Point(285,165), new Size(25,25), plusTxt);
-
 
   offBtn->setColors(VGA_RED, VGA_RED, VGA_MAROON, VGA_WHITE);
   minRamp1Btn->setColors(VGA_BLUE, VGA_BLUE, VGA_BLUE, VGA_WHITE);
@@ -311,8 +278,6 @@ void ReflowView::DrawSetPage()
   gui->addWidget(minReflowTempBtn);
   gui->addWidget(minReflowTimeBtn);
 
-
-
   gui->addWidget(ramp1Lbl);
   gui->addWidget(soakTempLbl);
   gui->addWidget(soakTimeLbl);
@@ -334,16 +299,11 @@ void ReflowView::DrawSetPage()
   gui->addWidget(plusReflowTempBtn);
   gui->addWidget(plusReflowTimeBtn);
 
-  //Serial.println("Widget added");
-  //delay(50);
   gui->draw();
 
 }
 
 void ReflowView::Update()
 {
-  //Serial.println();
-  //delay(10);
-
   gui->update();
 }

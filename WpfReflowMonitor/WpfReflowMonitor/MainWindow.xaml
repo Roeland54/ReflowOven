@@ -4,9 +4,7 @@
   xmlns:wpfReflowMonitor="clr-namespace:WpfReflowMonitor"
   Title="monitor"
   Height="500" Width="700 " Loaded="Window_Loaded">
-    <Window.DataContext>
-        <wpfReflowMonitor:Data/>
-    </Window.DataContext>
+
     <Grid Background="LightBlue" >
         <Canvas Name="canGraph" Background="White"
       Width="650" Height="450"

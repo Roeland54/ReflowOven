@@ -21,9 +21,14 @@ namespace WpfReflowMonitor
     /// </summary>
     public partial class MainWindow : Window
     {
+        PointCollection wantedPoints = new PointCollection();
+        Polyline polylineWanted= new Polyline();
+
         public MainWindow()
         {
             InitializeComponent();
+            Setup();
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -97,9 +102,14 @@ namespace WpfReflowMonitor
                 canGraph.Children.Add(polyline);
             }
 
-            Data data = new Data();
-            data.Setup();
 
-            }
+            polylineWanted.StrokeThickness = 1;
+            polylineWanted.Stroke = Brushes.Blue;
+            polylineWanted.Points = wantedPoints;
+            canGraph.Children.Add(polylineWanted);
+
+
+
+        }
         }
     }
