@@ -1,14 +1,14 @@
 #include "ReflowView.h"
 
 typedef void (ReflowView::*TouchCallbackPointer)(Widget*);
-char * wantedLblTxt = "Wanted :";
-char * realLblTxt = "Actual :";
+char * wantedLblTxt = "Wanted:";
+char * realLblTxt = "Actual:";
 char * Txt1 = "Soak ramp:";
 char * Txt2 = "Soak time:";
 char * Txt3 = "Soak temp:";
 char * Txt4 = "Flow ramp:";
-char * Txt5 = "Refl. temp";
-char * Txt6 = "Refl. time";
+char * Txt5 = "Refl.temp:";
+char * Txt6 = "Refl.time:";
 
 double * Txt7;
 double * Txt8;
@@ -23,7 +23,7 @@ ReflowView::ReflowView()
 }
 
 ReflowView::ReflowView(
-    ClickedCallbackPointer press,
+   ClickedCallbackPointer press,
    ClickedCallbackPointer release,
    float *wantedTemp,
    float *realTemp,
@@ -157,7 +157,7 @@ void ReflowView::DrawFlowPage()
   gui->clear();
 
   char * offTxt = "STOP";
-  char * tmpLblTxt = "%4.2f C";
+  char * tmpLblTxt = "%4.2f C ";
 
   wantedTempLbl = new Label(new Point(167, 40), tmpLblTxt);
   realTempLbl = new Label(new Point(167, 80), tmpLblTxt);
