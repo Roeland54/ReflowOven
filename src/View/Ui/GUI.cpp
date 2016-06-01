@@ -52,7 +52,7 @@ void GUI::update()
 
   if(touch->dataAvailable())
   {
-    Serial.println("Touch detected");
+    //Serial.println("Touch detected");
     //delay(100);
     if(startWidget != NULL)
     {
@@ -74,13 +74,13 @@ void GUI::update()
   }
  else
  {
-  //startWidget->checkHit(1, 1, &currentPress);
+  startWidget->checkHit(1, 1, &currentPress);
   currentPress = 0;
  }
 
  //Serial.print("currentPress: ");
- Serial.println((int)currentPress);
- delay(100);
+ //Serial.println((int)currentPress);
+ delay(100); // er in laten
  //Serial.print("previousPress: ");
  //Serial.println((int)previousPress);
  //delay(100);
@@ -90,7 +90,7 @@ void GUI::update()
     if(currentPress)
     {
 
-      Serial.println("currentPress");
+      //Serial.println("currentPress");
       currentPress->pressed = true;
       currentPress->drawSingle();
       clickCallback(currentPress);

@@ -10,7 +10,7 @@ class ReflowCurveSettings
     void SetReflow(double RtpTempPerSec, double ReflowMaxTemp, double ReflowTime);
     void SetCooling(double CoolingTempPerSec);
 
-  //private:
+
     double kp, ki, kd;
     double rtsTempPerSec, soakTemp, rtpTempPerSec, reflowMaxTemp, coolingTempPerSec;
     double soakTime, reflowTime;

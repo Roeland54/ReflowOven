@@ -60,7 +60,7 @@ void FlowController::Compute()
 
     }
     *wantedTemp = setpoint;
-    Serial.println("");
+    //Serial.println("");
     //Serial.println(currentTemp);
     double output = pid.Compute(currentTemp);
     serialController->SendTempData(currentTemp, setpoint, output);

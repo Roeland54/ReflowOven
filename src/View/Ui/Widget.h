@@ -9,7 +9,8 @@
 enum Type
 {
     INT = 1,
-    FLOAT
+    FLOAT,
+    DOUBLE
 };
 
 //Save hash of value, on change check hash with previous hash, if changed, redraw.
@@ -33,6 +34,7 @@ public:
 	bool bold;
 	int fontSize;
 	bool pressed;
+  bool binding = false;
 
 	UTFT * tft;
 

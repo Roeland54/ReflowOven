@@ -71,8 +71,12 @@ void Widget::checkHit(int _x, int _y, Widget ** _last)
     pressed = false;
 
 
-	//if(checkBindings())
+	if(binding)
+	{
 		drawSingle();
+		//Serial.println("drawSingle");
+	}
+
 
 
   if(next != NULL)
@@ -108,6 +112,7 @@ void Widget::addBinding(void * _value, Type _type)
 	values[0].value = _value;
 	values[0].type = _type;
 
+	binding = true;
 	bindingHashes[0] = hash(0);
 }
 

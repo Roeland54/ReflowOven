@@ -33,9 +33,10 @@ void Label::draw(int _x, int _y, bool useLoc, bool _drawNext)
 	{
 	  if(values[0].type == INT)
 	    sprintf(buf, text, (int)(*(int*)values[0].value)); //Werkt perfect!
-	  else
+	  else if (values[0].type == FLOAT)
 	    sprintf(buf, text, (float)(*(float*)values[0].value)); //Werkt perfect!
-
+		else if (values[0].type == DOUBLE)
+	    sprintf(buf, text, (double)(*(double*)values[0].value));
 	  tft->print(buf, location->x + (useLoc?_x:0), location->y + (useLoc?_y:0));
 	}
 	else

@@ -53,7 +53,7 @@ void setup()
 {
 
 	//Serial.begin(9600);
-	view = ReflowView(press, release, &wantedTemp, &realTemp);
+	view = ReflowView(press, release, &wantedTemp, &realTemp, curveSettings);
 
 
 	controller->Init(settings);
@@ -70,7 +70,7 @@ void loop()
 
 	if(i == 15)
 	{
-		Serial.println("puls");
+		//Serial.println("puls");
 		i = 0;
 	}
 	i++;

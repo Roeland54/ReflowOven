@@ -48,3 +48,5 @@
 \\psf\Dropbox\Projecten\reflow\lib\CmdMessenger\CSharp\DataLogging\obj\x86\Debug\DataLogging.ChartForm.resources
 \\psf\Dropbox\Projecten\reflow\lib\CmdMessenger\CSharp\DataLogging\obj\x86\Debug\DataLogging.Properties.Resources.resources
 \\psf\Dropbox\Projecten\reflow\lib\CmdMessenger\CSharp\DataLogging\obj\x86\Debug\5-DataLogging.csproj.GenerateResource.Cache
+C:\Users\Roeland\Dropbox\Projecten\reflow\lib\CmdMessenger\CSharp\DataLogging\obj\x86\Debug\DataLogging.exe
+C:\Users\Roeland\Dropbox\Projecten\reflow\lib\CmdMessenger\CSharp\DataLogging\obj\x86\Debug\DataLogging.pdb
